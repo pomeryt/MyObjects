@@ -28,7 +28,7 @@ class PlainTaskValueTest {
 
 	@Test
 	void testEventHandling() {
-		// EventVlaue object.
+		// EventValue object.
 		final EventValue<String> fruit = new EventValue<>();
 
 		// List for storing fruits after each update.
