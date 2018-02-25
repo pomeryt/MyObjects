@@ -23,7 +23,7 @@ public final class EventValue<T> implements TaskGiveable<T>, TaskUpdateable<T> {
 	}
 	
 	@Override
-	public void addEvent(ParamEvent<T> event) {
+	public void addEvent(final ParamEvent<T> event) {
 		this.events.add(event);
 	}
 
