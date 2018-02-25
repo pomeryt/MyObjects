@@ -18,13 +18,13 @@ class EventValueTest {
 	@Test
 	void testGiveThrows() {
 		assertThrows(RuntimeException.class,
-				() -> new EventValue<String>().value(new ThrowableGive<>("Please update value first.")));
+				() -> new EventValue<String>().value(new ThrowableGive<>(this.giveErrorMessage)));
 	}
 
 	@Test
 	void testUpdateThrows() {
 		assertThrows(RuntimeException.class, () -> new EventValue<String>()
-				.update(new ThrowableUpdate<String>(null, "Do not update with null value.")));
+				.update(new ThrowableUpdate<String>(null, this.updateErrorMessage)));
 	}
 
 	@Test
@@ -33,10 +33,10 @@ class EventValueTest {
 		final EventValue<String> fruit = new EventValue<>();
 
 		// Update value.
-		fruit.update(new ThrowableUpdate<String>("Apple", "Do not update with null value."));
+		fruit.update(new ThrowableUpdate<String>("Apple", this.updateErrorMessage));
 
 		// Check the value.
-		assertThat(fruit.value(new ThrowableGive<>("Please update value first.")), new IsEqual<String>("Apple"));
+		assertThat(fruit.value(new ThrowableGive<>(this.giveErrorMessage)), new IsEqual<String>("Apple"));
 	}
 
 	@Test
@@ -53,9 +53,9 @@ class EventValueTest {
 		});
 
 		// Update values.
-		fruit.update(new ThrowableUpdate<String>("Apple", "Do not update with null value."));
-		fruit.update(new ThrowableUpdate<String>("Banana", "Do not update with null value."));
-		fruit.update(new ThrowableUpdate<String>("Orange", "Do not update with null value."));
+		fruit.update(new ThrowableUpdate<String>("Apple", this.updateErrorMessage));
+		fruit.update(new ThrowableUpdate<String>("Banana",this.updateErrorMessage));
+		fruit.update(new ThrowableUpdate<String>("Orange", this.updateErrorMessage));
 
 		// Check the events.
 		final List<String> expectedFruits = new ArrayList<>();
@@ -87,9 +87,9 @@ class EventValueTest {
 		});
 
 		// Update values.
-		fruit.update(new ThrowableUpdate<String>("Apple", "Do not update with null value."));
-		fruit.update(new ThrowableUpdate<String>("Banana", "Do not update with null value."));
-		fruit.update(new ThrowableUpdate<String>("Orange", "Do not update with null value."));
+		fruit.update(new ThrowableUpdate<String>("Apple", this.updateErrorMessage));
+		fruit.update(new ThrowableUpdate<String>("Banana", this.updateErrorMessage));
+		fruit.update(new ThrowableUpdate<String>("Orange", this.updateErrorMessage));
 
 		// Check the normal fruits.
 		final List<String> expectedFruits = new ArrayList<>();
@@ -105,4 +105,7 @@ class EventValueTest {
 		expectedLowerCasedFruits.add("orange");
 		assertThat(lowerCasedFruits, new IsEqual<List<String>>(expectedLowerCasedFruits));
 	}
+	
+	private final String giveErrorMessage = "The value does not exist. Please update value before.";
+	private final String updateErrorMessage = "Do not update with null value.";
 }
