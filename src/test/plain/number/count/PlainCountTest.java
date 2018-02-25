@@ -40,6 +40,10 @@ class PlainCountTest {
 	
 	@Test
 	void testInitialValue() {
+		// Easy easy to define the initial value.
+		assertThat(new PlainCount(3).value(), new IsEqual<>(3));
+		
+		// More primitive way to define the initial value which is not recommended.
 		assertThat(new PlainCount(new int[] {3}).value(), new IsEqual<>(3));
 	}
 

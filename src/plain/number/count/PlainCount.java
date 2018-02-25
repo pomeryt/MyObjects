@@ -7,7 +7,7 @@ import plain.number.count.contract.PlainIntGivable;
  * It simply count integer. <br />
  * See <b>PlainCountTest</b> for example.
  * @author Rin
- * @version 1.0.0
+ * @version 1.1.0
  */
 public final class PlainCount implements PlainIncrementable, PlainIntGivable {
 
@@ -17,6 +17,15 @@ public final class PlainCount implements PlainIncrementable, PlainIntGivable {
 	 */
 	public PlainCount() {
 		this(new int[] {0});
+	}
+	
+	/**
+	 * Define an initial value of this object.
+	 * @param initialValue
+	 * @since 1.1.0
+	 */
+	public PlainCount(final int initialValue) {
+		this(new int[] {initialValue});
 	}
 	
 	/**
