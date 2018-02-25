@@ -6,9 +6,10 @@ import plain.event.ParamEvent;
 
 /**
  * Update the value. <br />
- * If new value is null, then it will throw Exception.
+ * If new value is null, then it will throw Exception. <br />
+ * See <b>EventValueTest</b> for example.
  * @author Rin
- * @version 1.0.0
+ * @version 1.0.1
  * @param <T>
  */
 public final class ThrowableUpdate<T> implements UpdateTask<T> {

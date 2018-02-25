@@ -4,9 +4,10 @@ import java.util.List;
 
 /**
  * Give the value. <br />
- * It throws exception if the value does not exists.
+ * It throws exception if the value does not exists. <br />
+ * See <b>EventValueTest</b> for example.
  * @author Rin
- * @version 1.0.0
+ * @version 1.0.1
  * @param <T>
  */
 public final class ThrowableGive<T> implements GiveTask<T> {
