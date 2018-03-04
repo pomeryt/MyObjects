@@ -9,103 +9,77 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
+import plain.contract.validation.ListValidation;
+import plain.contract.validation.ValueValidation;
 import plain.value.EventValue;
-import plain.value.contract.task.give.ThrowableGive;
-import plain.value.contract.task.update.ThrowableUpdate;
+import plain.value.give.ThrowableGive;
+import plain.value.update.ThrowableUpdate;
 
 class EventValueTest {
 
 	@Test
-	void testGiveThrows() {
-		assertThrows(RuntimeException.class,
-				() -> new EventValue<String>().value(new ThrowableGive<>(this.giveErrorMessage)));
-	}
-
-	@Test
-	void testUpdateThrows() {
-		assertThrows(RuntimeException.class, () -> new EventValue<String>()
-				.update(new ThrowableUpdate<String>(null, this.updateErrorMessage)));
-	}
-
-	@Test
-	void testNormalBehavior() {
-		// EventVlaue object.
-		final EventValue<String> fruit = new EventValue<>();
-
-		// Update value.
-		fruit.update(new ThrowableUpdate<String>("Apple", this.updateErrorMessage));
-
+	void testDefaultBehavior() {
+		// EventValue object.
+		final EventValue<String> eventValue = new EventValue<>();
+		
+		// Update value as "Apple"
+		eventValue.update("Apple");
+		
 		// Check the value.
-		assertThat(fruit.value(new ThrowableGive<>(this.giveErrorMessage)), new IsEqual<String>("Apple"));
-	}
-
-	@Test
-	void testEvent() {
-		// EventVlaue object.
-		final EventValue<String> fruit = new EventValue<>();
-
-		// List for storing fruits after each update.
-		final List<String> fruits = new ArrayList<>();
-
-		// Define event.
-		fruit.addEvent(value -> {
-			fruits.add(value);
-		});
-
-		// Update values.
-		fruit.update(new ThrowableUpdate<String>("Apple", this.updateErrorMessage));
-		fruit.update(new ThrowableUpdate<String>("Banana",this.updateErrorMessage));
-		fruit.update(new ThrowableUpdate<String>("Orange", this.updateErrorMessage));
-
-		// Check the events.
-		final List<String> expectedFruits = new ArrayList<>();
-		expectedFruits.add("Apple");
-		expectedFruits.add("Banana");
-		expectedFruits.add("Orange");
-		assertThat(fruits, new IsEqual<List<String>>(expectedFruits));
-	}
-
-	@Test
-	void testMultipleEvents() {
-		// EventVlaue object.
-		final EventValue<String> fruit = new EventValue<>();
-
-		// List for storing fruits after each update.
-		final List<String> fruits = new ArrayList<>();
-
-		// Add fruit to the list when the value is updated.
-		fruit.addEvent(value -> {
-			fruits.add(value);
-		});
-		
-		// List for storing fruits with all lower case.
-		final List<String> lowerCasedFruits = new ArrayList<>();
-		
-		// Add fruit to the list with lower case.
-		fruit.addEvent(value -> {
-			lowerCasedFruits.add(value.toLowerCase());
-		});
-
-		// Update values.
-		fruit.update(new ThrowableUpdate<String>("Apple", this.updateErrorMessage));
-		fruit.update(new ThrowableUpdate<String>("Banana", this.updateErrorMessage));
-		fruit.update(new ThrowableUpdate<String>("Orange", this.updateErrorMessage));
-
-		// Check the normal fruits.
-		final List<String> expectedFruits = new ArrayList<>();
-		expectedFruits.add("Apple");
-		expectedFruits.add("Banana");
-		expectedFruits.add("Orange");
-		assertThat(fruits, new IsEqual<List<String>>(expectedFruits));
-		
-		// Check the lowerCasedFruits.
-		final List<String> expectedLowerCasedFruits = new ArrayList<>();
-		expectedLowerCasedFruits.add("apple");
-		expectedLowerCasedFruits.add("banana");
-		expectedLowerCasedFruits.add("orange");
-		assertThat(lowerCasedFruits, new IsEqual<List<String>>(expectedLowerCasedFruits));
+		assertThat(eventValue.value(), new IsEqual<>("Apple"));
 	}
 	
-	private final String giveErrorMessage = "The value does not exist. Please update value before.";
-	private final String updateErrorMessage = "Do not update with null value.";
+	@Test
+	void testEventHandling() {
+		// EventValue object.
+		final EventValue<String> eventValue = new EventValue<>();
+		
+		// List to check event handling.
+		final List<String> actualList = new ArrayList<>();
+		
+		// Add an event to be handled.
+		eventValue.addEvent(value -> actualList.add(value));
+		
+		// Update the value multiple times.
+		eventValue.update("Apple");
+		eventValue.update("Banana");
+		eventValue.update("Orange");
+		
+		// Expected list after multiple updates.
+		final List<String> expectedList = new ArrayList<>();
+		expectedList.add("Apple");
+		expectedList.add("Banana");
+		expectedList.add("Orange");
+		
+		// Check if the event has been handled.
+		assertThat(actualList, new IsEqual<>(expectedList));
+	}
+	
+	@Test
+	void testGiveValidation() {
+		// ListValidation object that returns false always.
+		final ListValidation<String> validation = list -> false;
+		
+		// Check if the value is invalid.
+		final Exception exception = assertThrows(RuntimeException.class, () -> {
+			new EventValue<String>().value(new ThrowableGive<>("Invalid.", validation));
+		});
+		
+		// Check the error message.
+		assertThat(exception.getMessage(), new IsEqual<>("Invalid."));
+	}
+	
+	@Test
+	void testUpdateValidation() {
+		// ValueValidation object that returns false always.
+		final ValueValidation<String> validation = value -> false;
+
+		// Check if the value is invalid.
+		final Exception exception = assertThrows(RuntimeException.class, () -> {
+			new EventValue<String>().update(new ThrowableUpdate<String>(null, "Invalid.", validation));
+		});
+
+		// Check the error message.
+		assertThat(exception.getMessage(), new IsEqual<>("Invalid."));
+	}
 }

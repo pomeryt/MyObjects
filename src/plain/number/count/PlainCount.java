@@ -1,15 +1,15 @@
 package plain.number.count;
 
-import plain.number.count.contract.PlainIncrementable;
-import plain.number.count.contract.PlainIntGivable;
+import plain.contract.give.PlainGiveable;
+import plain.contract.number.PlainIncrementable;
 
 /**
  * It simply count integer. <br />
  * See <b>PlainCountTest</b> for example.
  * @author Rin
- * @version 1.1.0
+ * @version 2.0.0
  */
-public final class PlainCount implements PlainIncrementable, PlainIntGivable {
+public final class PlainCount implements PlainIncrementable, PlainGiveable<Integer> {
 
 	/**
 	 * The default initial value is zero.
@@ -37,7 +37,7 @@ public final class PlainCount implements PlainIncrementable, PlainIntGivable {
 	}
 	
 	@Override
-	public int value() {
+	public Integer value() {
 		return this.memory[0];
 	}
 

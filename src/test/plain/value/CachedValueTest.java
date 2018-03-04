@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
+import plain.contract.give.PlainGiveable;
+import plain.contract.validation.ListValidation;
 import plain.number.count.PlainCount;
 import plain.value.CachedValue;
-import plain.value.contract.PlainGiveable;
+import plain.value.give.ThrowableGive;
 
 class CachedValueTest {
 
@@ -98,10 +100,17 @@ class CachedValueTest {
 	}
 
 	@Test
-	void testThrow() {
-		assertThrows(RuntimeException.class, () -> {
-			new CachedValue<String>(() -> null).value();
+	void testValidation() {
+		// Validation object that return false always.
+		final ListValidation<String> validation = item -> false;
+		
+		// Check if the null is invalid.
+		final Exception exception = assertThrows(RuntimeException.class, () -> {
+			new CachedValue<String>(() -> null).value(new ThrowableGive<String>("Invalid.", validation));
 		});
+		
+		// Check the message.
+		assertThat(exception.getMessage(), new IsEqual<>("Invalid."));
 	}
 
 }

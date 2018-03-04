@@ -3,22 +3,36 @@ package plain.value;
 import java.util.ArrayList;
 import java.util.List;
 
-import plain.event.ParamEvent;
-import plain.value.contract.TaskGiveable;
-import plain.value.contract.TaskUpdateable;
-import plain.value.contract.task.give.GiveTask;
-import plain.value.contract.task.update.UpdateTask;
+import plain.contract.event.ParamEvent;
+import plain.contract.give.GiveableViaTask;
+import plain.contract.give.PlainGiveable;
+import plain.contract.give.task.TaskOfGiveable;
+import plain.contract.update.PlainUpdateable;
+import plain.contract.update.UpdateableViaTask;
+import plain.contract.update.task.TaskOfUpdateable;
+import plain.value.give.PlainGive;
+import plain.value.update.PlainUpdate;
 
 /**
  * If the value is changed, then it will update everything that is related to this value. <br />
  * See <b>EventValueTest</b> for example.
  * @author Rin
- * @version 1.0.0
+ * @version 2.0.0
  */
-public final class EventValue<T> implements TaskGiveable<T>, TaskUpdateable<T> {
+public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>, GiveableViaTask<T>, UpdateableViaTask<T> {
 
 	@Override
-	public void update(final UpdateTask<T> updateTask) {
+	public T value() {
+		return new PlainGive<T>().handle(this.memory);
+	}
+	
+	@Override
+	public void update(final T value) {
+		new PlainUpdate<>(value).handle(this.memory, this.events);;
+	}
+	
+	@Override
+	public void update(final TaskOfUpdateable<T> updateTask) {
 		updateTask.handle(this.memory, this.events);
 	}
 	
@@ -28,7 +42,7 @@ public final class EventValue<T> implements TaskGiveable<T>, TaskUpdateable<T> {
 	}
 
 	@Override
-	public T value(final GiveTask<T> giveTask) {
+	public T value(final TaskOfGiveable<T> giveTask) {
 		return giveTask.handle(this.memory);
 	}
 	
