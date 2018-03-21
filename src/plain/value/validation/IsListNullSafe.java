@@ -5,9 +5,9 @@ import java.util.List;
 import plain.contract.validation.ListValidation;
 
 /**
- * Check if the list if null-free.
+ * Check if the list is null-free.
  * @author Rin
- * @version 1.0.0
+ * @version 1.0.1
  * @param <T> Parameter type of the list.
  */
 public final class IsListNullSafe<T> implements ListValidation<T> {

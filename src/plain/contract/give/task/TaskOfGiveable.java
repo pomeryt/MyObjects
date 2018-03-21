@@ -3,10 +3,11 @@ package plain.contract.give.task;
 import java.util.List;
 
 /**
- * A task to give a value.
+ * A task for strategy pattern. <br>
+ * It is responsible for giving a value.
  * @author Rin
- * @version 2.0.0
- * @param <T>
+ * @version 2.0.1
+ * @param <T> The type of value you are trying to give.
  */
 public interface TaskOfGiveable<T> {
 	/**

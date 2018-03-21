@@ -6,16 +6,17 @@ import plain.contract.give.task.TaskOfGiveable;
 import plain.contract.validation.ListValidation;
 
 /**
- * Give the value. <br />
+ * A task for strategy pattern. <br>
+ * It is responsible for giving the value. <br>
  * It throws exception if the value is invalid.
  * @author Rin
- * @version 2.0.0
- * @param <T>
+ * @version 2.0.1
+ * @param <T> The type of value you are trying to give.
  */
 public final class ThrowableGive<T> implements TaskOfGiveable<T> {
 	
 	/**
-	 * @param errorMessage
+	 * @param errorMessage to show when the value is invalid.
 	 * @param validations
 	 * @since 2.0.0
 	 */

@@ -8,10 +8,12 @@ import plain.contract.give.PlainGiveable;
 import plain.contract.give.task.TaskOfGiveable;
 
 /**
- * The value obtained via some logic will be cached. <br />
- * See <b>CachedValueTest</b> for example.
+ * An immutable value. <br>
+ * You can use the strategy pattern when you give the value. <br>
+ * In other words, you can provide a task which knows how to give the value. <br>
+ * The value obtained via some logic will be cached.
  * @author Rin
- * @version 2.0.0
+ * @version 2.0.1
  * @param <T> Type of the value.
  */
 public final class CachedValue<T> implements PlainGiveable<T>, GiveableViaTask<T> {

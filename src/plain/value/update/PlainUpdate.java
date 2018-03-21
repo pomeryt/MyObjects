@@ -6,12 +6,13 @@ import plain.contract.event.ParamEvent;
 import plain.contract.update.task.TaskOfUpdateable;
 
 /**
- * It simply update the value without any validation. <br />
- * It should be used when the input value is expected to be valid for sure. <br />
- * It is still responsible for handling the events. <br />
- * See <b>PlainTaskValueTest</b> for example.
+ * A task for strategy pattern. <br>
+ * It simply update the value without any validation. <br>
+ * It should be used when new value is expected to be valid for sure. <br>
+ * It also use the observer pattern. <br>
+ * After changing the value, it should handle all the side effects.
  * @author Rin
- * @version 2.0.0
+ * @version 2.0.1
  */
 public final class PlainUpdate<T> implements TaskOfUpdateable<T> {
 

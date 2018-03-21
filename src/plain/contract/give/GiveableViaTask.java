@@ -3,10 +3,12 @@ package plain.contract.give;
 import plain.contract.give.task.TaskOfGiveable;
 
 /**
- * Responsible for giving the value.
+ * It uses strategy pattern. <br>
+ * You need to provide a task in order to give the value. <br>
+ * This object simply execute the task, and the task knows how to give the value.
  * @author Rin
- * @version 2.0.0
- * @param <T>
+ * @version 2.0.1
+ * @param <T> The type of value you are trying give.
  */
 public interface GiveableViaTask<T> {
 	/**

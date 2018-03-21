@@ -4,10 +4,10 @@ import plain.contract.give.PlainGiveable;
 import plain.contract.number.PlainIncrementable;
 
 /**
- * It simply count integer. <br />
- * See <b>PlainCountTest</b> for example.
+ * A counter. <br>
+ * It simply count the number one by one.
  * @author Rin
- * @version 2.0.0
+ * @version 2.0.1
  */
 public final class PlainCount implements PlainIncrementable, PlainGiveable<Integer> {
 

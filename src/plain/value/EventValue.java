@@ -14,10 +14,13 @@ import plain.value.give.PlainGive;
 import plain.value.update.PlainUpdate;
 
 /**
- * If the value is changed, then it will update everything that is related to this value. <br />
- * See <b>EventValueTest</b> for example.
+ * A mutable value. <br>
+ * You can apply the strategy pattern. <br>
+ * For example, you can provide a task which knows how to give or update the value. <br>
+ * It also use the observer pattern. <br>
+ * If the value is changed, then it will update everything that is related to this value.
  * @author Rin
- * @version 2.0.0
+ * @version 2.0.1
  */
 public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>, GiveableViaTask<T>, UpdateableViaTask<T> {
 
