@@ -1,4 +1,4 @@
-package test.plain.number.count;
+package plain.number.count;
 
 import static org.junit.Assert.assertThat;
 

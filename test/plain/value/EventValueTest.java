@@ -1,4 +1,4 @@
-package test.plain.value;
+package plain.value;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

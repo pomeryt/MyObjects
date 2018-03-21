@@ -1,4 +1,4 @@
-package test.plain.value.give;
+package plain.value.give;
 
 import static org.junit.Assert.assertThat;
 

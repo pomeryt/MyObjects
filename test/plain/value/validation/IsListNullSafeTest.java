@@ -1,4 +1,4 @@
-package test.plain.value.validation;
+package plain.value.validation;
 
 import static org.junit.Assert.assertThat;
 
