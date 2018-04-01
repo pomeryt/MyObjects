@@ -5,9 +5,10 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 /**
- * It is responsible for moving a node to different container.
+ * It is responsible for moving a node to different container. <br>
+ * It will do nothing if the node is already in the container you are moving to.
  * @author Rin
- * @version 1.0.0
+ * @version 1.0.1
  */
 public final class SwitchPane implements TaskOfDoableWithNode {
 
