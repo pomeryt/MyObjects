@@ -93,4 +93,11 @@ class EventValueTest {
 		// Check the error message.
 		assertThat(exception.getMessage(), new IsEqual<>("The value does not exist. Please update the value first."));
 	}
+	
+	@Test
+	void testInitialValue() {
+		// Check if the initial value is stored correctly.
+		assertThat(new EventValue<String>("Apple").value(), new IsEqual<>("Apple"));
+	}
+	
 }
