@@ -82,4 +82,15 @@ class EventValueTest {
 		// Check the error message.
 		assertThat(exception.getMessage(), new IsEqual<>("Invalid."));
 	}
+
+	@Test
+	void testEmptyCase() {
+		// Check if it throws exception when the value does not exist.
+		final Exception exception = assertThrows(RuntimeException.class, () -> {
+			new EventValue<String>().value();
+		});
+		
+		// Check the error message.
+		assertThat(exception.getMessage(), new IsEqual<>("The value does not exist. Please update the value first."));
+	}
 }

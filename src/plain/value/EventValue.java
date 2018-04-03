@@ -10,8 +10,9 @@ import plain.contract.give.task.TaskOfGiveable;
 import plain.contract.update.PlainUpdateable;
 import plain.contract.update.UpdateableViaTask;
 import plain.contract.update.task.TaskOfUpdateable;
-import plain.value.give.PlainGive;
+import plain.value.give.ThrowableGive;
 import plain.value.update.PlainUpdate;
+import plain.value.validation.IsListFilled;
 
 /**
  * A mutable value. <br>
@@ -20,13 +21,13 @@ import plain.value.update.PlainUpdate;
  * It also use the observer pattern. <br>
  * If the value is changed, then it will update everything that is related to this value.
  * @author Rin
- * @version 2.0.1
+ * @version 2.0.2
  */
 public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>, GiveableViaTask<T>, UpdateableViaTask<T> {
 
 	@Override
 	public T value() {
-		return new PlainGive<T>().handle(this.memory);
+		return new ThrowableGive<T>("The value does not exist. Please update the value first.", new IsListFilled<>()).handle(this.memory);
 	}
 	
 	@Override
