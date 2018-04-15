@@ -1,4 +1,4 @@
-package plain.value.validation;
+package plain.validation.list;
 
 import java.util.List;
 

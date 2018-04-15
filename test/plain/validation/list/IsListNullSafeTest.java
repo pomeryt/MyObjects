@@ -1,4 +1,4 @@
-package plain.value.validation;
+package plain.validation.list;
 
 import static org.junit.Assert.assertThat;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import plain.value.validation.IsListNullSafe;
+import plain.validation.list.IsListNullSafe;
 
 class IsListNullSafeTest {
 

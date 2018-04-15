@@ -1,4 +1,4 @@
-package plain.map.validation;
+package plain.validation.map;
 
 import static org.junit.Assert.assertThat;
 
@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
+
+import plain.validation.map.IsKeyNewToMap;
 
 class IsKeyNewToMapTest {
 

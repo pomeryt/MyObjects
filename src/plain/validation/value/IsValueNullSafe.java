@@ -1,4 +1,4 @@
-package plain.value.validation;
+package plain.validation.value;
 
 import plain.contract.validation.ValueValidation;
 

@@ -1,4 +1,4 @@
-package plain.map.validation;
+package plain.validation.map;
 
 import java.util.Map;
 

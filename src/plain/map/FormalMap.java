@@ -9,8 +9,8 @@ import plain.contract.map.task.TaskOfGiveableMap;
 import plain.contract.map.task.TaskToPutInMap;
 import plain.map.task.ThrowableGiveFromMap;
 import plain.map.task.ThrowablePutInMap;
-import plain.map.validation.IsKeyNewToMap;
-import plain.map.validation.IsKeyRegisteredInMap;
+import plain.validation.map.IsKeyNewToMap;
+import plain.validation.map.IsKeyRegisteredInMap;
 
 /**
  * It encapsulates a map with strategy pattern. <br>

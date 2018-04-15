@@ -1,11 +1,11 @@
-package plain.value.validation;
+package plain.validation.value;
 
 import static org.junit.Assert.assertThat;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import plain.value.validation.IsValueNullSafe;
+import plain.validation.value.IsValueNullSafe;
 
 class IsValueNullSafeTest {
 
