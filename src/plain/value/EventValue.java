@@ -32,7 +32,7 @@ public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>
 
 	/**
 	 * Instantiate this object without initial value.
-	 * @since 2.1.0
+	 * @since 2.1.1
 	 */
 	public EventValue() {
 		this(new ArrayList<T>());
@@ -63,7 +63,7 @@ public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>
 	
 	@Override
 	public void update(final T value) {
-		new PlainUpdate<>(value).handle(this.memory, this.events);;
+		new PlainUpdate<>(value).handle(this.memory, this.events);
 	}
 	
 	@Override
