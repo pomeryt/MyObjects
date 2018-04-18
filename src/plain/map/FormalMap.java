@@ -1,6 +1,7 @@
 package plain.map;
 
 import java.util.Map;
+import java.util.Set;
 
 import plain.contract.map.GiveableMap;
 import plain.contract.map.RegisterableMap;
@@ -14,11 +15,11 @@ import plain.validation.map.IsKeyRegisteredInMap;
 
 /**
  * It encapsulates a map with strategy pattern. <br>
- * The motivation of this class is to make your intention explicit when you put a pair to the map. <br>
+ * The motivation of this class is to make your intention explicit when you put a pair into the map. <br>
  * For example, you should use register method to put a pair for the first time. <br>
  * And you should use update method to change the pair in map.
  * @author Rin
- * @version 1.0.0
+ * @version 1.1.0
  * @param <K> The type of key.
  * @param <V> The type of value.
  */
@@ -42,6 +43,11 @@ public final class FormalMap<K, V> implements RegisterableMap<K, V>, UpdateableM
 		return task.handle(this.map);
 	}
 
+	@Override
+	public Set<K> keys() {
+		return this.map.keySet();
+	}
+	
 	@Override
 	public void update(final K key, final V value) {
 		new ThrowablePutInMap<K, V>(key, value, "The key have not been registered.", new IsKeyRegisteredInMap<K, V>()).handle(this.map);

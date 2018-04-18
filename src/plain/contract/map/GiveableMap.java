@@ -1,12 +1,14 @@
 package plain.contract.map;
 
+import java.util.Set;
+
 import plain.contract.map.task.TaskOfGiveableMap;
 
 /**
  * It allows you to obtain a value from the map. <br>
  * You may use the strategy pattern to obtain a value.
  * @author Rin
- * @version 1.0.0
+ * @version 1.1.0
  * @param <K> The type of key.
  * @param <V> The type of value.
  */
@@ -25,4 +27,11 @@ public interface GiveableMap<K, V> {
 	 * @since 1.0.0
 	 */
 	V value(TaskOfGiveableMap<K, V> task);
+	
+	/**
+	 * This method is for iterating the map.
+	 * @return set of keys.
+	 * @since 1.1.0
+	 */
+	Set<K> keys();
 }
