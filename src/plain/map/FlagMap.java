@@ -54,9 +54,9 @@ public final class FlagMap<K, M extends RegisterableMap<K, Boolean> & Updateable
 	/**
 	 * Sample usage: <br>
 	 * <pre>
-	 * &sol;&sol; ConditionalRunForMap is a task object.
-	 * &sol;&sol; "new IsAllTrueInMap&lt;&gt;(selectedKeys)" is the validation part.
-	 * &sol;&sol; "() -&gt; count.increment()" is the execution part when it is valid.
+	 * &#47;&#47; ConditionalRunForMap is a task object.
+	 * &#47;&#47; "new IsAllTrueInMap&lt;&gt;(selectedKeys)" is the validation part.
+	 * &#47;&#47; "() -&gt; count.increment()" is the execution part when it is valid.
 	 * flagMap.run(new ConditionalRunForMap&lt;&gt;(() -&gt; count.increment(), new IsAllTrueInMap&lt;&gt;(selectedKeys)));
 	 * </pre>
 	 */
