@@ -16,7 +16,7 @@ import plain.contract.task.VoidTask;
  * It is a decorator of another custom map. <br>
  * It is recommended to encapsulate FormalMap.
  * @author Rin
- * @version 2.0.0
+ * @version 2.0.1
  * @param <K> The type of key in map.
  * @param <M> An object type to be encapsulated.
  */
@@ -24,8 +24,8 @@ public final class FlagMap<K, M extends RegisterableMap<K, Boolean> & Updateable
 	
 	/**
 	 * FormalMap is recommended for default origin.
-	 * @param origin An object that implements RegisterableMap & UpdateableMap & GiveableMap.
-	 * @since 2.0.0
+	 * @param origin An object that implements RegisterableMap, UpdateableMap, and GiveableMap.
+	 * @since 2.0.1
 	 */
 	public FlagMap(final M origin) {
 		this.origin = origin;
