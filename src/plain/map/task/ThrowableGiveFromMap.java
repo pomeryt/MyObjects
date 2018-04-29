@@ -2,7 +2,7 @@ package plain.map.task;
 
 import java.util.Map;
 
-import plain.contract.map.task.TaskOfGiveableMap;
+import plain.contract.task.ReturnTask;
 import plain.contract.validation.MapGetValidation;
 
 /**
@@ -10,11 +10,11 @@ import plain.contract.validation.MapGetValidation;
  * It is responsible for giving a value from the map. <br>
  * It will throw exception when the map.get(K key) operation is not valid.
  * @author Rin
- * @version 1.0.0
+ * @version 2.0.0
  * @param <K> The type of key.
  * @param <V> The type of value.
  */
-public final class ThrowableGiveFromMap<K, V> implements TaskOfGiveableMap<K, V> {
+public final class ThrowableGiveFromMap<K, V> implements ReturnTask<V, Map<K, V>> {
 	
 	/**
 	 * @param key to get value from the map.

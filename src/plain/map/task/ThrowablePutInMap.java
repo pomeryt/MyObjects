@@ -2,7 +2,7 @@ package plain.map.task;
 
 import java.util.Map;
 
-import plain.contract.map.task.TaskToPutInMap;
+import plain.contract.task.VoidTask;
 import plain.contract.validation.MapPutValidation;
 
 /**
@@ -10,11 +10,11 @@ import plain.contract.validation.MapPutValidation;
  * It is responsible for putting a pair in the map. <br>
  * It will throw exception when the map.put(K key, V value) operation is not valid.
  * @author Rin
- * @version 1.0.0
+ * @version 2.0.0
  * @param <K> The type of key.
  * @param <V> The type of value.
  */
-public final class ThrowablePutInMap<K, V> implements TaskToPutInMap<K, V> {
+public final class ThrowablePutInMap<K, V> implements VoidTask<Map<K, V>> {
 	
 	/**
 	 * @param key of pair.

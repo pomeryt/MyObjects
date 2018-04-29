@@ -3,13 +3,14 @@ package plain.map.task;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
 import plain.contract.map.GiveableMap;
-import plain.contract.map.task.TaskOfGiveableMap;
+import plain.contract.task.ReturnTask;
 import plain.contract.validation.GiveableMapValidation;
 import plain.number.count.PlainCount;
 
@@ -34,7 +35,7 @@ class ConditionalRunnableMapTest {
 			}
 
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
 				return true;
 			}
 
@@ -72,7 +73,7 @@ class ConditionalRunnableMapTest {
 			}
 
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
 				return true;
 			}
 
@@ -80,6 +81,8 @@ class ConditionalRunnableMapTest {
 			public Set<String> keys() {
 				return new HashSet<String>();
 			}
+
+			
 		};
 		
 		// Run the main task.
@@ -109,7 +112,8 @@ class ConditionalRunnableMapTest {
 			}
 
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
+				// TODO Auto-generated method stub
 				return true;
 			}
 
@@ -117,6 +121,8 @@ class ConditionalRunnableMapTest {
 			public Set<String> keys() {
 				return new HashSet<String>();
 			}
+
+			
 		};
 		
 		// Run the main task.
@@ -147,7 +153,7 @@ class ConditionalRunnableMapTest {
 			}
 
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
 				return true;
 			}
 
@@ -155,6 +161,7 @@ class ConditionalRunnableMapTest {
 			public Set<String> keys() {
 				return new HashSet<String>();
 			}
+
 		};
 		
 		// Run the main task.

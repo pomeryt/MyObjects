@@ -3,7 +3,6 @@ package plain.map;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.hamcrest.core.IsEqual;
@@ -18,7 +17,7 @@ class FlagMapTest {
 	@Test
 	void testNormalBehavior() {
 		// FlagMap object to be tested.
-		final FlagMap<String> flagMap = new FlagMap<>(new HashMap<>());
+		final FlagMap<String, FormalMap<String, Boolean>> flagMap = new FlagMap<>(new FormalMap<>());
 		flagMap.register("Apple", true);
 		flagMap.register("Banana", false);
 		flagMap.register("Orange", true);
@@ -41,7 +40,7 @@ class FlagMapTest {
 	@Test
 	void testIgnoredBehavior() {
 		// FlagMap object to be tested.
-		final FlagMap<String> flagMap = new FlagMap<>(new HashMap<>());
+		final FlagMap<String, FormalMap<String, Boolean>> flagMap = new FlagMap<>(new FormalMap<>());
 		flagMap.register("Apple", true);
 		flagMap.register("Banana", false);
 		flagMap.register("Orange", true);

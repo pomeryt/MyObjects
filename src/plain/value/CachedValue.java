@@ -5,7 +5,7 @@ import java.util.List;
 
 import plain.contract.give.GiveableViaTask;
 import plain.contract.give.PlainGiveable;
-import plain.contract.give.task.TaskOfGiveable;
+import plain.contract.task.ReturnTask;
 
 /**
  * An immutable value. <br>
@@ -13,10 +13,10 @@ import plain.contract.give.task.TaskOfGiveable;
  * In other words, you can provide a task which knows how to give the value. <br>
  * The value obtained via some logic will be cached.
  * @author Rin
- * @version 2.0.1
+ * @version 3.0.0
  * @param <T> Type of the value.
  */
-public final class CachedValue<T> implements PlainGiveable<T>, GiveableViaTask<T> {
+public final class CachedValue<T> implements PlainGiveable<T>, GiveableViaTask<T, List<T>> {
 	
 	/**
 	 * @param giveable A logic to generate the value.
@@ -32,7 +32,7 @@ public final class CachedValue<T> implements PlainGiveable<T>, GiveableViaTask<T
 	}
 	
 	@Override
-	public T value(final TaskOfGiveable<T> task) {
+	public T value(final ReturnTask<T, List<T>> task) {
 		return task.handle(this.cached());
 	}
 	

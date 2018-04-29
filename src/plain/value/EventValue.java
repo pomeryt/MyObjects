@@ -7,7 +7,7 @@ import java.util.List;
 import plain.contract.event.ParamEvent;
 import plain.contract.give.GiveableViaTask;
 import plain.contract.give.PlainGiveable;
-import plain.contract.give.task.TaskOfGiveable;
+import plain.contract.task.ReturnTask;
 import plain.contract.update.PlainUpdateable;
 import plain.contract.update.UpdateableViaTask;
 import plain.contract.update.task.TaskOfUpdateable;
@@ -26,9 +26,9 @@ import plain.value.update.PlainUpdate;
  * Only the first element of the list should be used to store its value. <br>
  * In other words, only index 0 of the list should be used.
  * @author Rin
- * @version 2.1.0
+ * @version 3.0.0
  */
-public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>, GiveableViaTask<T>, UpdateableViaTask<T> {
+public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>, GiveableViaTask<T, List<T>>, UpdateableViaTask<T> {
 
 	/**
 	 * Instantiate this object without initial value.
@@ -77,7 +77,7 @@ public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>
 	}
 
 	@Override
-	public T value(final TaskOfGiveable<T> giveTask) {
+	public T value(final ReturnTask<T, List<T>> giveTask) {
 		return giveTask.handle(this.memory);
 	}
 	

@@ -1,18 +1,18 @@
 package plain.map.task;
 
 import plain.contract.map.GiveableMap;
-import plain.contract.run.task.TaskOfRunnable;
+import plain.contract.task.VoidTask;
 import plain.contract.validation.GiveableMapValidation;
 
 /**
  * It runs Runnable object when the conditions are met. <br>
  * It is a task for the strategy pattern used by some map.
  * @author Rin
- * @version 1.0.0
+ * @version 2.0.0
  * @param <K> The type of key.
  * @param <V> The type of value.
  */
-public final class ConditionalRunForMap<K, V> implements TaskOfRunnable<GiveableMap<K, V>> {
+public final class ConditionalRunForMap<K, V> implements VoidTask<GiveableMap<K, V>> {
 
 	/**
 	 * @param runnable It has a logic to be executed when the conditions are met.

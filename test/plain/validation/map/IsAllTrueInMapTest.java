@@ -12,7 +12,7 @@ import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
 import plain.contract.map.GiveableMap;
-import plain.contract.map.task.TaskOfGiveableMap;
+import plain.contract.task.ReturnTask;
 
 class IsAllTrueInMapTest {
 
@@ -31,7 +31,7 @@ class IsAllTrueInMapTest {
 				return map.get(key);
 			}
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
 				return task.handle(map);
 			}
 			@Override
@@ -62,7 +62,7 @@ class IsAllTrueInMapTest {
 				return map.get(key);
 			}
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
 				return task.handle(map);
 			}
 			@Override
@@ -98,7 +98,7 @@ class IsAllTrueInMapTest {
 				return map.get(key);
 			}
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
 				return task.handle(map);
 			}
 			@Override
@@ -129,7 +129,7 @@ class IsAllTrueInMapTest {
 				return map.get(key);
 			}
 			@Override
-			public Boolean value(final TaskOfGiveableMap<String, Boolean> task) {
+			public Boolean value(final ReturnTask<Boolean, Map<String, Boolean>> task) {
 				return task.handle(map);
 			}
 			@Override
