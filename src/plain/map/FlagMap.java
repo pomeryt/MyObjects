@@ -16,7 +16,7 @@ import plain.contract.task.VoidTask;
  * It is a decorator of another custom map. <br>
  * It is recommended to encapsulate FormalMap.
  * @author Rin
- * @version 2.0.1
+ * @version 2.0.2
  * @param <K> The type of key in map.
  * @param <M> An object type to be encapsulated.
  */
@@ -51,6 +51,15 @@ public final class FlagMap<K, M extends RegisterableMap<K, Boolean> & Updateable
 		this.origin.register(task);
 	}
 	
+	/**
+	 * Sample usage: <br>
+	 * <pre>
+	 * &sol;&sol; ConditionalRunForMap is a task object.
+	 * &sol;&sol; "new IsAllTrueInMap&lt;&gt;(selectedKeys)" is the validation part.
+	 * &sol;&sol; "() -&gt; count.increment()" is the execution part when it is valid.
+	 * flagMap.run(new ConditionalRunForMap&lt;&gt;(() -&gt; count.increment(), new IsAllTrueInMap&lt;&gt;(selectedKeys)));
+	 * </pre>
+	 */
 	@Override
 	public void run(final VoidTask<GiveableMap<K, Boolean>> task) {
 		task.handle(this.origin);
