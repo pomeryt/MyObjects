@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: "jacoco"
+apply plugin: 'jacoco'
 
 repositories {
 	mavenCentral()
@@ -34,3 +34,25 @@ eclipse.project {
 }
 
 build.finalizedBy(jacocoTestReport)
+
+// Publish to bintry.
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.8.1'
+    }
+}
+
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+	publishVersion = '3.2.0'
+	repoName = 'MyObjects'
+    userOrg = 'pomeryt'
+    groupId = 'pomeryt.myobjects'
+    artifactId = 'myobjects'
+    desc = 'https://github.com/pomeryt/MyObjects'
+    website = 'https://github.com/pomeryt/MyObjects'
+}
