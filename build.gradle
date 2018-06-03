@@ -23,6 +23,7 @@ test {
     // Show test results.
     testLogging {
         events "passed", "skipped", "failed"
+        exceptionFormat = 'full'
     }
     
     jacocoTestReport
