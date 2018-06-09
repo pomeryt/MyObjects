@@ -41,6 +41,8 @@ jacocoTestReport {
 
 }
 
+check.dependsOn jacocoTestReport
+
 eclipse.project {
 	natures 'org.eclipse.jdt.core.javanature'
   	natures 'org.eclipse.buildship.core.gradleprojectnature'
