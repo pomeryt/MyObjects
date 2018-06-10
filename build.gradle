@@ -23,9 +23,22 @@ test {
     // Show test results.
     testLogging {
         events "passed", "skipped", "failed"
+        exceptionFormat = 'full'
     }
     
     jacocoTestReport
+}
+
+jacocoTestReport {
+
+    reports {
+
+        xml.enabled true
+
+        html.enabled false
+
+    }
+
 }
 
 eclipse.project {

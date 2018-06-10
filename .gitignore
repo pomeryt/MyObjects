@@ -5,7 +5,3 @@
 /.gradle/
 
 build/
-gradlew
-gradle.bat
-gradlew.bat
-gradle/
