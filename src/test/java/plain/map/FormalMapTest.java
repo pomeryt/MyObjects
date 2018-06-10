@@ -34,16 +34,25 @@ class FormalMapTest {
 		final FormalMap<String, String> formalMap = new FormalMap<>(new HashMap<>());
 		
 		// Check if it throws exception when you ask a value for unregistered key.
-		assertThrows(RuntimeException.class, () -> formalMap.value("One"));
+		final Exception valueException = assertThrows(RuntimeException.class, () -> formalMap.value("One"));
+		
+		// Check the error message.
+		assertThat(valueException.getMessage(), new IsEqual<>("The key 'One' has not been registered."));
 		
 		// Check if it throws exception when you try to update a pair in which the key has not been registered before.
-		assertThrows(RuntimeException.class, () -> formalMap.update("One", "Apple"));
+		final Exception updateException = assertThrows(RuntimeException.class, () -> formalMap.update("One", "Apple"));
+		
+		// Check the error message.
+		assertThat(updateException.getMessage(), new IsEqual<>("The key 'One' has not been registered."));
 		
 		// Register a pair.
 		formalMap.register("One", "Apple");
 		
 		// Check if it throws exception when you try to register a pair in which the key has already been registered before.
-		assertThrows(RuntimeException.class, () -> formalMap.register("One", "Apple"));
+		final Exception registerException = assertThrows(RuntimeException.class, () -> formalMap.register("One", "Apple"));
+		
+		// Check the error message.
+		assertThat(registerException.getMessage(), new IsEqual<>("The key 'One' has already been registered before."));
 	}
 
 }

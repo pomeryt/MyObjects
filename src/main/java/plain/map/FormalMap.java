@@ -47,7 +47,10 @@ public final class FormalMap<K, V> implements RegisterableMap<K, V>, UpdateableM
 	
 	@Override
 	public V value(final K key) {
-		return new ThrowableGiveFromMap<K, V>(key, "The key have not been registered.", new IsKeyRegisteredInMap<K, V>()).handle(this.map);
+		return new ThrowableGiveFromMap<K, V>(
+			key, "The key "+"'"+key+"'"+" has not been registered.", 
+			new IsKeyRegisteredInMap<K, V>()
+		).handle(this.map);
 	}
 
 	@Override
@@ -62,7 +65,11 @@ public final class FormalMap<K, V> implements RegisterableMap<K, V>, UpdateableM
 	
 	@Override
 	public void update(final K key, final V value) {
-		new ThrowablePutInMap<K, V>(key, value, "The key have not been registered.", new IsKeyRegisteredInMap<K, V>()).handle(this.map);
+		new ThrowablePutInMap<K, V>(
+			key, value, 
+			"The key "+"'"+key+"'"+" has not been registered.", 
+			new IsKeyRegisteredInMap<K, V>()
+		).handle(this.map);
 	}
 
 	@Override
@@ -72,7 +79,11 @@ public final class FormalMap<K, V> implements RegisterableMap<K, V>, UpdateableM
 
 	@Override
 	public void register(final K key, final V value) {
-		new ThrowablePutInMap<>(key, value, "The key has already been registered before.", new IsKeyNewToMap<K, V>()).handle(this.map);
+		new ThrowablePutInMap<>(
+			key, value, 
+			"The key "+"'"+key+"'"+" has already been registered before.", 
+			new IsKeyNewToMap<K, V>()
+		).handle(this.map);
 	}
 
 	@Override
