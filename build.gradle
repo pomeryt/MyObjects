@@ -61,7 +61,7 @@ buildscript {
 apply plugin: 'com.novoda.bintray-release'
 
 publish {
-	publishVersion = '3.3.0'
+	publishVersion = '3.4.0'
 	repoName = 'MyObjects'
     userOrg = 'pomeryt'
     groupId = 'pomeryt.myobjects'
