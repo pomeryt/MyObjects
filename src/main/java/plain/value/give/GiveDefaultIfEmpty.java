@@ -13,13 +13,13 @@ import plain.contract.task.ReturnTask;
  * @version 1.0.0
  * @param <T> The type of return value.
  */
-public final class DefaultIfEmptyGive<T> implements ReturnTask<T, List<T>> {
+public final class GiveDefaultIfEmpty<T> implements ReturnTask<T, List<T>> {
 
 	/**
 	 * @param defaultValue to return when the memory is empty.
 	 * @since 1.0.0
 	 */
-	public DefaultIfEmptyGive(final T defaultValue) {
+	public GiveDefaultIfEmpty(final T defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 	

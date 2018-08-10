@@ -7,12 +7,12 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
-class DefaultIfEmptyGiveTest {
+class GiveDefaultIfEmptyTest {
 
 	@Test
 	void testDefaultValue() {
 		MatcherAssert.assertThat(
-			new DefaultIfEmptyGive<String>("Apple").handle(new ArrayList<>()), 
+			new GiveDefaultIfEmpty<String>("Apple").handle(new ArrayList<>()), 
 			CoreMatchers.equalTo("Apple")
 		);
 	}
@@ -22,7 +22,7 @@ class DefaultIfEmptyGiveTest {
 		final List<String> memory = new ArrayList<>();
 		memory.add("Apple");
 		MatcherAssert.assertThat(
-			new DefaultIfEmptyGive<String>("Banana").handle(memory), 
+			new GiveDefaultIfEmpty<String>("Banana").handle(memory), 
 			CoreMatchers.equalTo("Apple")
 		);
 	}
