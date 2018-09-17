@@ -41,6 +41,18 @@ jacocoTestReport {
 
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.9
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
 eclipse.project {
 	natures 'org.eclipse.jdt.core.javanature'
   	natures 'org.eclipse.buildship.core.gradleprojectnature'
