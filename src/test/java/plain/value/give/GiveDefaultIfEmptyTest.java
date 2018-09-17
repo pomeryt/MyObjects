@@ -27,4 +27,11 @@ class GiveDefaultIfEmptyTest {
 		);
 	}
 
+	@Test
+	void testDefaultFromLogic() {
+		MatcherAssert.assertThat(
+			new GiveDefaultIfEmpty<>(() -> "Apple").handle(new ArrayList<>()), 
+			CoreMatchers.equalTo("Apple")
+		);
+	}
 }

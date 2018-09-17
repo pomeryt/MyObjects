@@ -2,6 +2,7 @@ package plain.value.give;
 
 import java.util.List;
 
+import plain.contract.give.PlainGiveable;
 import plain.contract.task.ReturnTask;
 
 /**
@@ -10,7 +11,7 @@ import plain.contract.task.ReturnTask;
  * 1. null is stored in the memory.
  * 2. The default value is null.
  * @author Rin
- * @version 1.0.0
+ * @version 2.0.0
  * @param <T> The type of return value.
  */
 public final class GiveDefaultIfEmpty<T> implements ReturnTask<T, List<T>> {
@@ -20,16 +21,24 @@ public final class GiveDefaultIfEmpty<T> implements ReturnTask<T, List<T>> {
 	 * @since 1.0.0
 	 */
 	public GiveDefaultIfEmpty(final T defaultValue) {
-		this.defaultValue = defaultValue;
+		this(() -> defaultValue);
+	}
+	
+	/**
+	 * @param giveable A logic to return some value.
+	 * @since 2.0.0
+	 */
+	public GiveDefaultIfEmpty(final PlainGiveable<T> giveable) {
+		this.giveable = giveable;
 	}
 	
 	@Override
 	public T handle(final List<T> memory) {
 		if (memory.isEmpty()) {
-			return this.defaultValue;
+			return this.giveable.value();
 		}
 		return memory.get(0);
 	}
 	
-	private final T defaultValue;
+	private final PlainGiveable<T> giveable;
 }
