@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import plain.contract.map.GiveableMap;
-import plain.contract.map.RegisterableMap;
-import plain.contract.map.UpdateableMap;
 import plain.contract.task.ReturnTask;
 import plain.contract.task.VoidTask;
 import plain.map.task.ThrowableGiveFromMap;
@@ -20,11 +17,11 @@ import plain.validation.map.IsKeyRegisteredInMap;
  * For example, you should use register method to put a pair for the first time. <br>
  * And you should use update method to change the pair in map.
  * @author Rin
- * @version 2.0.0
+ * @version 3.0.0
  * @param <K> The type of key.
  * @param <V> The type of value.
  */
-public final class FormalMap<K, V> implements RegisterableMap<K, V>, UpdateableMap<K, V>, GiveableMap<K, V> {
+public final class FormalMap<K, V> implements StrictMap<K, V> {
 	
 	/**
 	 * Secondary constructor. <br>

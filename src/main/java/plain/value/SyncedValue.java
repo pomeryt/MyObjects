@@ -3,20 +3,16 @@ package plain.value;
 import java.util.List;
 
 import plain.contract.event.ParamEvent;
-import plain.contract.give.GiveableViaTask;
-import plain.contract.give.PlainGiveable;
 import plain.contract.task.ReturnTask;
-import plain.contract.update.PlainUpdateable;
-import plain.contract.update.UpdateableViaTask;
 import plain.contract.update.task.TaskOfUpdateable;
 
 /**
  * Thread-safe version of {@link EventValue}. 
  * @author Rin
- * @version 1.0.0
+ * @version 2.0.0
  * @param <T> The type of value.
  */
-public final class SyncedValue<T> implements PlainGiveable<T>, PlainUpdateable<T>, GiveableViaTask<T, List<T>>, UpdateableViaTask<T> {
+public final class SyncedValue<T> implements LiveValue<T> {
 	
 	public SyncedValue() {
 		this(new EventValue<>());
@@ -26,34 +22,34 @@ public final class SyncedValue<T> implements PlainGiveable<T>, PlainUpdateable<T
 		this(new EventValue<>(initialValue));
 	}
 	
-	public SyncedValue(final EventValue<T> eventValue) {
-		this.eventValue = eventValue;
+	public SyncedValue(final LiveValue<T> liveValue) {
+		this.liveValue = liveValue;
 	}
 	
 	@Override
 	public synchronized void update(final TaskOfUpdateable<T> task) {
-		this.eventValue.update(task);
+		this.liveValue.update(task);
 	}
 
 	@Override
 	public synchronized T value(final ReturnTask<T, List<T>> task) {
-		return this.eventValue.value(task);
+		return this.liveValue.value(task);
 	}
 
 	@Override
 	public synchronized void update(final T value) {
-		this.eventValue.update(value);
+		this.liveValue.update(value);
 	}
 
 	@Override
 	public synchronized void addEvent(final ParamEvent<T> event) {
-		this.eventValue.addEvent(event);
+		this.liveValue.addEvent(event);
 	}
 
 	@Override
 	public synchronized T value() {
-		return this.eventValue.value();
+		return this.liveValue.value();
 	}
 	
-	private final EventValue<T> eventValue;
+	private final LiveValue<T> liveValue;
 }

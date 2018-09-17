@@ -5,11 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import plain.contract.event.ParamEvent;
-import plain.contract.give.GiveableViaTask;
-import plain.contract.give.PlainGiveable;
 import plain.contract.task.ReturnTask;
-import plain.contract.update.PlainUpdateable;
-import plain.contract.update.UpdateableViaTask;
 import plain.contract.update.task.TaskOfUpdateable;
 import plain.validation.list.IsListFilled;
 import plain.value.give.ThrowableGive;
@@ -26,9 +22,9 @@ import plain.value.update.PlainUpdate;
  * Only the first element of the list should be used to store its value. <br>
  * In other words, only index 0 of the list should be used.
  * @author Rin
- * @version 3.0.0
+ * @version 4.0.0
  */
-public final class EventValue<T> implements PlainGiveable<T>, PlainUpdateable<T>, GiveableViaTask<T, List<T>>, UpdateableViaTask<T> {
+public final class EventValue<T> implements LiveValue<T> {
 
 	/**
 	 * Instantiate this object without initial value.

@@ -1,15 +1,12 @@
 package plain.number.count;
 
-import plain.contract.give.PlainGiveable;
-import plain.contract.number.PlainIncrementable;
-
 /**
  * A counter. <br>
  * It simply count the number one by one.
  * @author Rin
- * @version 2.0.1
+ * @version 3.0.0
  */
-public final class PlainCount implements PlainIncrementable, PlainGiveable<Integer> {
+public final class PlainCount implements SimpleCount {
 
 	/**
 	 * The default initial value is zero.

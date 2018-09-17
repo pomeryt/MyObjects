@@ -3,9 +3,6 @@ package plain.map;
 import java.util.Map;
 
 import plain.contract.map.GiveableMap;
-import plain.contract.map.RegisterableMap;
-import plain.contract.map.UpdateableMap;
-import plain.contract.run.RunnableViaTask;
 import plain.contract.task.VoidTask;
 
 /**
@@ -16,18 +13,18 @@ import plain.contract.task.VoidTask;
  * It is a decorator of another custom map. <br>
  * It is recommended to encapsulate FormalMap.
  * @author Rin
- * @version 2.0.2
+ * @version 3.0.0
  * @param <K> The type of key in map.
  * @param <M> An object type to be encapsulated.
  */
-public final class FlagMap<K, M extends RegisterableMap<K, Boolean> & UpdateableMap<K, Boolean> & GiveableMap<K, Boolean>> implements RegisterableMap<K, Boolean>, UpdateableMap<K, Boolean>, RunnableViaTask<GiveableMap<K, Boolean>> {
+public final class FlagMap<K> implements RunnableMap<K, Boolean> {
 	
 	/**
 	 * FormalMap is recommended for default origin.
 	 * @param origin An object that implements RegisterableMap, UpdateableMap, and GiveableMap.
 	 * @since 2.0.1
 	 */
-	public FlagMap(final M origin) {
+	public FlagMap(final StrictMap<K, Boolean> origin) {
 		this.origin = origin;
 	}
 	
@@ -65,6 +62,6 @@ public final class FlagMap<K, M extends RegisterableMap<K, Boolean> & Updateable
 		task.handle(this.origin);
 	}
 	
-	private final M origin;
+	private final StrictMap<K, Boolean> origin;
 
 }

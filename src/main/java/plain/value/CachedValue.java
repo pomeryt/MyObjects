@@ -3,7 +3,6 @@ package plain.value;
 import java.util.ArrayList;
 import java.util.List;
 
-import plain.contract.give.GiveableViaTask;
 import plain.contract.give.PlainGiveable;
 import plain.contract.task.ReturnTask;
 
@@ -13,10 +12,10 @@ import plain.contract.task.ReturnTask;
  * In other words, you can provide a task which knows how to give the value. <br>
  * The value obtained via some logic will be cached.
  * @author Rin
- * @version 3.0.0
+ * @version 4.0.0
  * @param <T> Type of the value.
  */
-public final class CachedValue<T> implements PlainGiveable<T>, GiveableViaTask<T, List<T>> {
+public final class CachedValue<T> implements GivingValue<T> {
 	
 	/**
 	 * @param giveable A logic to generate the value.
