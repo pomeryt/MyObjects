@@ -10,9 +10,12 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 class SyncedValueTest {
 
 	@Test
+	@SuppressFBWarnings("UC_USELESS_OBJECT")
 	void test() {
 		final AtomicBoolean running = new AtomicBoolean(false);
 		final AtomicInteger overlaps = new AtomicInteger(0);

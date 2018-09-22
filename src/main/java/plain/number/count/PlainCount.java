@@ -4,7 +4,7 @@ package plain.number.count;
  * A counter. <br>
  * It simply count the number one by one.
  * @author Rin
- * @version 3.0.0
+ * @version 3.0.1
  */
 public final class PlainCount implements SimpleCount {
 
@@ -30,7 +30,7 @@ public final class PlainCount implements SimpleCount {
 	 * @since 1.0.0
 	 */
 	public PlainCount(final int[] memory) {
-		this.memory = memory;
+		this.memory = memory.clone();
 	}
 	
 	@Override

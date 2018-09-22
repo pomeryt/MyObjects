@@ -1,16 +1,30 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'jacoco'
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.8.1'
+    }
+}
+
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'jacoco'
+}
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-    testCompile('org.junit.jupiter:junit-jupiter-api:5.2.0')
-	testCompile('org.junit.jupiter:junit-jupiter-params:5.2.0')
-	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.2.0')
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+	testCompile 'org.junit.jupiter:junit-jupiter-params:5.2.0'
+	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
 	testImplementation 'org.hamcrest:hamcrest-library:1.3'
+	compile 'com.google.code.findbugs:annotations:3.0.1'
+    compile 'com.google.code.findbugs:jsr305:3.0.1'
 }
 
 test {
@@ -22,7 +36,7 @@ test {
 
     // Show test results.
     testLogging {
-        events "passed", "skipped", "failed"
+        events 'passed', 'skipped', 'failed'
         exceptionFormat = 'full'
     }
     
@@ -60,16 +74,6 @@ eclipse.project {
 
 build.finalizedBy(jacocoTestReport)
 
-// Publish to bintry.
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.novoda:bintray-release:0.8.1'
-    }
-}
-
 apply plugin: 'com.novoda.bintray-release'
 
 publish {
@@ -80,4 +84,16 @@ publish {
     artifactId = 'myobjects'
     desc = 'https://github.com/pomeryt/MyObjects'
     website = 'https://github.com/pomeryt/MyObjects'
+}
+
+apply plugin: 'findbugs'
+findbugs {
+    ignoreFailures = false
+    effort = "max"
+}
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
 }
