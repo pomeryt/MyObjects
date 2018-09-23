@@ -8,8 +8,6 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import plain.value.give.PlainGive;
-
 class PlainGiveTest {
 
 	@Test

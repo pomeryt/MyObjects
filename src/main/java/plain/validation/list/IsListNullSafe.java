@@ -15,7 +15,7 @@ public final class IsListNullSafe<T> implements ListValidation<T> {
 	@Override
 	public boolean valid(final List<T> list) {
 		// Return false if the list has null.
-		for (T item : list) {
+		for (final T item : list) {
 			if (item == null) {
 				return false;
 			}

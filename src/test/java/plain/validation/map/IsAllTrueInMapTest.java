@@ -11,18 +11,20 @@ import java.util.Set;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.map.GiveableMap;
 import plain.contract.task.ReturnTask;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IsAllTrueInMapTest {
 
 	@Test
 	void testValidCaseWithoutSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", true);
-		map.put("Banana", true);
-		map.put("Orange", true);
+		map.put(this.fruit1, true);
+		map.put(this.fruit2, true);
+		map.put(this.fruit3, true);
 		
 		// Dummy GiveableMap object which uses above map.
 		final GiveableMap<String, Boolean> giveableMap = new GiveableMap<String, Boolean>() {
@@ -51,9 +53,9 @@ class IsAllTrueInMapTest {
 	void testValidCaseWithSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", true);
-		map.put("Banana", false);
-		map.put("Orange", true);
+		map.put(this.fruit1, true);
+		map.put(this.fruit2, false);
+		map.put(this.fruit3, true);
 		
 		// Dummy GiveableMap object which uses above map.
 		final GiveableMap<String, Boolean> giveableMap = new GiveableMap<String, Boolean>() {
@@ -73,8 +75,8 @@ class IsAllTrueInMapTest {
 		
 		// Select keys to be tested.
 		final List<String> selectedKeys = new ArrayList<>();
-		selectedKeys.add("Apple");
-		selectedKeys.add("Orange");
+		selectedKeys.add(this.fruit1);
+		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
 		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>(selectedKeys);
@@ -87,9 +89,9 @@ class IsAllTrueInMapTest {
 	void testInvalidCaseWithoutSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", true);
-		map.put("Banana", true);
-		map.put("Orange", false);
+		map.put(this.fruit1, true);
+		map.put(this.fruit2, true);
+		map.put(this.fruit3, false);
 		
 		// Dummy GiveableMap object which uses above map.
 		final GiveableMap<String, Boolean> giveableMap = new GiveableMap<String, Boolean>() {
@@ -118,9 +120,9 @@ class IsAllTrueInMapTest {
 	void testInvalidCaseWithSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", true);
-		map.put("Banana", true);
-		map.put("Orange", false);
+		map.put(this.fruit1, true);
+		map.put(this.fruit2, true);
+		map.put(this.fruit3, false);
 		
 		// Dummy GiveableMap object which uses above map.
 		final GiveableMap<String, Boolean> giveableMap = new GiveableMap<String, Boolean>() {
@@ -140,8 +142,8 @@ class IsAllTrueInMapTest {
 		
 		// Select keys to be tested.
 		final List<String> selectedKeys = new ArrayList<>();
-		selectedKeys.add("Apple");
-		selectedKeys.add("Orange");
+		selectedKeys.add(this.fruit1);
+		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
 		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>(selectedKeys);
@@ -149,4 +151,8 @@ class IsAllTrueInMapTest {
 		// Check if the map is invalid.
 		assertThat(isAllTrueInMap.valid(giveableMap), new IsEqual<>(false));
 	}
+	
+	private final String fruit1 = "Apple";
+	private final String fruit2 = "Banana";
+	private final String fruit3 = "Orange";
 }

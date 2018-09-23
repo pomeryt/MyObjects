@@ -8,16 +8,17 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.event.ParamEvent;
-import plain.value.update.PlainUpdate;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class PlainUpdateTest {
 
 	@Test
 	void testUpdate() {
 
 		// PlainUpdate object.
-		final PlainUpdate<String> plainUpdate = new PlainUpdate<String>("Apple");
+		final PlainUpdate<String> plainUpdate = new PlainUpdate<String>(this.fruit1);
 
 		// List to be updated.
 		final List<String> memory = new ArrayList<>();
@@ -29,14 +30,14 @@ class PlainUpdateTest {
 		plainUpdate.handle(memory, events);
 
 		// Check if the update has been successful.
-		assertThat(memory.get(0), new IsEqual<>("Apple"));
+		assertThat(memory.get(0), new IsEqual<>(this.fruit1));
 	}
 	
 	@Test
 	void testEventHandling() {
 
 		// PlainUpdate object.
-		final PlainUpdate<String> plainUpdate = new PlainUpdate<String>("Apple");
+		final PlainUpdate<String> plainUpdate = new PlainUpdate<String>(this.fruit1);
 
 		// List to be updated.
 		final List<String> memory = new ArrayList<>();
@@ -58,10 +59,11 @@ class PlainUpdateTest {
 
 		// Expected list after update.
 		final List<String> expectedList = new ArrayList<>();
-		expectedList.add("Apple");
+		expectedList.add(this.fruit1);
 		
 		// Check the event handling.
 		assertThat(actualList, new IsEqual<>(expectedList));
 	}
 
+	private final String fruit1 = "Apple";
 }

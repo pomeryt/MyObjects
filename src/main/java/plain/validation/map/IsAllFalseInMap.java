@@ -39,7 +39,7 @@ public final class IsAllFalseInMap<K> implements GiveableMapValidation<K, Boolea
 	public boolean valid(final GiveableMap<K, Boolean> giveableMap) {
 		// Check all values in map when the keys are not selected at all.
 		if (this.selectedKeys.isEmpty()) {
-			for (K key : giveableMap.keys()) {
+			for (final K key : giveableMap.keys()) {
 				if (giveableMap.value(key)) {
 					return false;
 				}
@@ -48,7 +48,7 @@ public final class IsAllFalseInMap<K> implements GiveableMapValidation<K, Boolea
 		}
 		
 		// Check only the values for selected keys in map.
-		for (K key : this.selectedKeys) {
+		for (final K key : this.selectedKeys) {
 			if (giveableMap.value(key)) {
 				return false;
 			}

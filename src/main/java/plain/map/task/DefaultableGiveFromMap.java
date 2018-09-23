@@ -31,7 +31,7 @@ public final class DefaultableGiveFromMap<K, V> implements ReturnTask<V, Map<K, 
 	@Override
 	public V handle(final Map<K, V> map) {
 		// Make sure map.get(K key) operation is valid.
-		for (MapGetValidation<K, V> validation : this.validations) {
+		for (final MapGetValidation<K, V> validation : this.validations) {
 			if (validation.valid(this.key, map) == false) {
 				return this.defaultValue;
 			}

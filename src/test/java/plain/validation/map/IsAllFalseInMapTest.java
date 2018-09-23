@@ -11,9 +11,11 @@ import java.util.Set;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.map.GiveableMap;
 import plain.contract.task.ReturnTask;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IsAllFalseInMapTest {
 
 	// Dummy GiveableMap object to be validated.
@@ -38,9 +40,9 @@ class IsAllFalseInMapTest {
 	void testValidCaseWithoutSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", false);
-		map.put("Banana", false);
-		map.put("Orange", false);
+		map.put(this.fruit1, false);
+		map.put(this.fruit2, false);
+		map.put(this.fruit3, false);
 		
 		// The object to be tested.
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>();
@@ -53,14 +55,14 @@ class IsAllFalseInMapTest {
 	void testValidCaseWithSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", false);
-		map.put("Banana", true);
-		map.put("Orange", false);
+		map.put(this.fruit1, false);
+		map.put(this.fruit2, true);
+		map.put(this.fruit3, false);
 		
 		// Select keys to be tested.
 		final List<String> selectedKeys = new ArrayList<>();
-		selectedKeys.add("Apple");
-		selectedKeys.add("Orange");
+		selectedKeys.add(this.fruit1);
+		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>(selectedKeys);
@@ -73,9 +75,9 @@ class IsAllFalseInMapTest {
 	void testInvalidCaseWithoutSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", false);
-		map.put("Banana", false);
-		map.put("Orange", true);
+		map.put(this.fruit1, false);
+		map.put(this.fruit2, false);
+		map.put(this.fruit3, true);
 		
 		// The object to be tested.
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>();
@@ -88,14 +90,14 @@ class IsAllFalseInMapTest {
 	void testInvalidCaseWithSelection() {
 		// A map to be validated.
 		final Map<String, Boolean> map = new HashMap<>();
-		map.put("Apple", false);
-		map.put("Banana", true);
-		map.put("Orange", true);
+		map.put(this.fruit1, false);
+		map.put(this.fruit2, true);
+		map.put(this.fruit3, true);
 		
 		// Select keys to be tested.
 		final List<String> selectedKeys = new ArrayList<>();
-		selectedKeys.add("Apple");
-		selectedKeys.add("Orange");
+		selectedKeys.add(this.fruit1);
+		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>(selectedKeys);
@@ -103,5 +105,9 @@ class IsAllFalseInMapTest {
 		// Check if the map is invalid.
 		assertThat(isAllFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(false));
 	}
+	
+	private final String fruit1 = "Apple";
+	private final String fruit2 = "Banana";
+	private final String fruit3 = "Orange";
 	
 }

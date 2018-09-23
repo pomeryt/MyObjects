@@ -8,27 +8,29 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.map.task.ConditionalRunForMap;
 import plain.number.count.PlainCount;
 import plain.validation.map.IsAllTrueInMap;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class FlagMapTest {
 
 	@Test
 	void testNormalBehavior() {
 		// FlagMap object to be tested.
 		final FlagMap<String> flagMap = new FlagMap<>(new FormalMap<>());
-		flagMap.register("Apple", true);
-		flagMap.register("Banana", false);
-		flagMap.register("Orange", true);
+		flagMap.register(this.fruit1, true);
+		flagMap.register(this.fruit2, false);
+		flagMap.register(this.fruit3, true);
 		
 		// Counter to check whether the runnable has been executed or not.
 		final PlainCount count = new PlainCount();
 		
 		// Keys to be checked in condition.
 		final List<String> selectedKeys = new ArrayList<>();
-		selectedKeys.add("Apple");
-		selectedKeys.add("Orange");
+		selectedKeys.add(this.fruit1);
+		selectedKeys.add(this.fruit3);
 		
 		// Try to run the runnable.
 		flagMap.run(new ConditionalRunForMap<>(() -> count.increment(), new IsAllTrueInMap<>(selectedKeys)));
@@ -41,17 +43,17 @@ class FlagMapTest {
 	void testIgnoredBehavior() {
 		// FlagMap object to be tested.
 		final FlagMap<String> flagMap = new FlagMap<>(new FormalMap<>());
-		flagMap.register("Apple", true);
-		flagMap.register("Banana", false);
-		flagMap.register("Orange", true);
+		flagMap.register(this.fruit1, true);
+		flagMap.register(this.fruit2, false);
+		flagMap.register(this.fruit3, true);
 		
 		// Counter to check whether the runnable has been executed or not.
 		final PlainCount count = new PlainCount();
 		
 		// Keys to be checked in condition.
 		final List<String> selectedKeys = new ArrayList<>();
-		selectedKeys.add("Apple");
-		selectedKeys.add("Banana");
+		selectedKeys.add(this.fruit1);
+		selectedKeys.add(this.fruit2);
 		
 		// Try to run the runnable.
 		flagMap.run(new ConditionalRunForMap<>(() -> count.increment(), new IsAllTrueInMap<>(selectedKeys)));
@@ -59,5 +61,9 @@ class FlagMapTest {
 		// Check if the logic has not been executed.
 		assertThat(count.value(), new IsEqual<>(0));
 	}
+	
+	private final String fruit1 = "Apple";
+	private final String fruit2 = "Banana";
+	private final String fruit3 = "Orange";
 
 }

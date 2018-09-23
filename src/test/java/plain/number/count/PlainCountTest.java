@@ -1,50 +1,26 @@
 package plain.number.count;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import org.hamcrest.core.IsEqual;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
-import plain.number.count.PlainCount;
-
 class PlainCountTest {
-
+	
 	@Test
-	void testIncrementation() {
-		// PlainCount object. Initial value is 0.
+	void incrementFromDefault() {
 		final PlainCount count = new PlainCount();
-
-		// Increment
-		count.increment();
-
-		// Check if the count is incremented correctly.
-		assertThat(count.value(), new IsEqual<>(1));
-
-		// Increment
-		count.increment();
-
-		// Check if the count is incremented correctly.
-		assertThat(count.value(), new IsEqual<>(2));
-
-		// Increment
-		count.increment();
-
-		// Check if the count is incremented correctly.
-		assertThat(count.value(), new IsEqual<>(3));
-	}
-
-	@Test
-	void testDefaultInitialValue() {
-		assertThat(new PlainCount().value(), new IsEqual<>(0));
+		for (int x = 0; x < 3; x++) {
+			count.increment();
+		}
+		MatcherAssert.assertThat(count.value(), CoreMatchers.equalTo(3));
 	}
 	
 	@Test
-	void testInitialValue() {
-		// Easy way to define the initial value.
-		assertThat(new PlainCount(3).value(), new IsEqual<>(3));
-		
-		// More primitive way to define the initial value which is not recommended.
-		assertThat(new PlainCount(new int[] {3}).value(), new IsEqual<>(3));
+	void incrementFromGiven() {
+		final PlainCount count = new PlainCount(3);
+		for (int x = 0; x < 3; x++) {
+			count.increment();
+		}
+		MatcherAssert.assertThat(count.value(), CoreMatchers.equalTo(6));
 	}
-
 }

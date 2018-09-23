@@ -10,7 +10,6 @@ import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
 import plain.contract.validation.ListValidation;
-import plain.value.give.ThrowableGive;
 
 class ThrowableGiveTest {
 
@@ -49,10 +48,7 @@ class ThrowableGiveTest {
 		final ThrowableGive<String> throwableGive = new ThrowableGive<>("Invalid.", validation);
 		
 		// Check if the ThrowableGive object throws RuntimeException.
-		final Throwable exception = assertThrows(RuntimeException.class, () -> throwableGive.handle(new ArrayList<>()));
-		
-		// Check the message from the exception.
-		assertThat(exception.getMessage(), new IsEqual<>("Invalid."));
+		assertThrows(RuntimeException.class, () -> throwableGive.handle(new ArrayList<>()));
 	}
 
 }

@@ -48,7 +48,7 @@ public final class ValueOnlyUpdate<T> implements TaskOfUpdateable<T> {
 	@Override
 	public void handle(final List<T> memory, final List<ParamEvent<T>> events) {
 		// Make sure the value is valid.
-		for (ValueValidation<T> validation : this.validations) {
+		for (final ValueValidation<T> validation : this.validations) {
 			if (validation.valid(this.value) == false) {
 				throw new RuntimeException(errorMessage);
 			}

@@ -46,8 +46,8 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRunForMap = new ConditionalRunForMap<>(runnable, validation);
-		conditionalRunForMap.handle(giveableMap);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation);
+		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has been executed correctly.
 		assertThat(count.value(), new IsEqual<>(1));
@@ -86,8 +86,8 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRunForMap = new ConditionalRunForMap<>(runnable, validation1, validation2);
-		conditionalRunForMap.handle(giveableMap);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation1, validation2);
+		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has been executed correctly.
 		assertThat(count.value(), new IsEqual<>(1));
@@ -126,8 +126,8 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRunForMap = new ConditionalRunForMap<>(runnable, validation);
-		conditionalRunForMap.handle(giveableMap);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation);
+		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has not been executed.
 		assertThat(count.value(), new IsEqual<>(0));
@@ -165,8 +165,8 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRunForMap = new ConditionalRunForMap<>(runnable, validation1, validation2);
-		conditionalRunForMap.handle(giveableMap);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation1, validation2);
+		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has not been executed.
 		assertThat(count.value(), new IsEqual<>(0));

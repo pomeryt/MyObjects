@@ -1,94 +1,29 @@
 package plain.value.update;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hamcrest.core.IsEqual;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import plain.contract.event.ParamEvent;
-import plain.contract.validation.ValueValidation;
-import plain.value.update.ThrowableUpdate;
+import plain.value.EventValue;
 
 class ThrowableUpdateTest {
 
 	@Test
-	void testValidCase() {
-		// ValueValidation object that returns true always.
-		final ValueValidation<String> validation = value -> true;
-
-		// ThrowableUpdate object.
-		final ThrowableUpdate<String> throwableUpdate = new ThrowableUpdate<String>("Apple", "Invalid.", validation);
-
-		// List to be updated.
-		final List<String> memory = new ArrayList<>();
-		
-		// List of ParamEvent objects to use ThrowableUpdate object.
-		final List<ParamEvent<String>> events = new ArrayList<>();
-
-		// Try to update the list.
-		throwableUpdate.handle(memory, events);
-
-		// Check if the update has been successful.
-		assertThat(memory.get(0), new IsEqual<>("Apple"));
+	void throwWhenInvalid() {
+		final EventValue<Integer> number = new EventValue<>(0);
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			number.update(new ThrowableUpdate<>(1, "Invalid", value -> false));
+		});
 	}
 	
 	@Test
-	void testInvalidCase() {
-		// ValueValidation object that returns false always.
-		final ValueValidation<String> validation = value -> false;
-
-		// ThrowableUpdate object.
-		final ThrowableUpdate<String> throwableUpdate = new ThrowableUpdate<String>("Apple", "Invalid.", validation);
-
-		// List to be updated.
-		final List<String> memory = new ArrayList<>();
-
-		// List of ParamEvent objects to use ThrowableUpdate object.
-		final List<ParamEvent<String>> events = new ArrayList<>();
-
-		// Check if the ThrowableUpdate object throws RuntimeException.
-		final Throwable exception = assertThrows(RuntimeException.class, () -> throwableUpdate.handle(memory, events));
-
-		// Check the message from the exception.
-		assertThat(exception.getMessage(), new IsEqual<>("Invalid."));
-	}
-	
-	@Test
-	void testEventHandling() {
-		// ValueValidation object that returns true always.
-		final ValueValidation<String> validation = value -> true;
-
-		// ThrowableUpdate object.
-		final ThrowableUpdate<String> throwableUpdate = new ThrowableUpdate<String>("Apple", "Invalid.", validation);
-
-		// List to be updated.
-		final List<String> memory = new ArrayList<>();
-		
-		// List to check the event handling.
-		final List<String> actualList = new ArrayList<>();
-		
-		// ParamEvent object to handle update event.
-		final ParamEvent<String> event = item -> {
-			actualList.add(item);
-		};
-
-		// List of ParamEvent objects to use ThrowableUpdate object.
-		final List<ParamEvent<String>> events = new ArrayList<>();
-		events.add(event);
-
-		// Try to update the list.
-		throwableUpdate.handle(memory, events);
-
-		// Expected list after update.
-		final List<String> expectedList = new ArrayList<>();
-		expectedList.add("Apple");
-		
-		// Check the event handling.
-		assertThat(actualList, new IsEqual<>(expectedList));
+	void doNotThrowIfValid() {
+		final EventValue<Integer> number = new EventValue<>(0);
+		number.update(new ThrowableUpdate<>(1, "Invalid", value -> true));
+		MatcherAssert.assertThat(
+			number.value(), CoreMatchers.equalTo(1)
+		);
 	}
 
 }

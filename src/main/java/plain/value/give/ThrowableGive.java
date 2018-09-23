@@ -29,7 +29,7 @@ public final class ThrowableGive<T> implements ReturnTask<T, List<T>> {
 	@Override
 	public T handle(final List<T> memory) {
 		// Make sure the value in the memory is valid.
-		for (ListValidation<T> validation : this.validations) {
+		for (final ListValidation<T> validation : this.validations) {
 			if (validation.valid(memory) == false) {
 				throw new RuntimeException(this.errorMessage);
 			}

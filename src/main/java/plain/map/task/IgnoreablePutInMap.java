@@ -33,7 +33,7 @@ public final class IgnoreablePutInMap<K, V> implements VoidTask<Map<K, V>> {
 	
 	@Override
 	public void handle(final Map<K, V> map) {
-		for (MapPutValidation<K, V> validation : this.validations) {
+		for (final MapPutValidation<K, V> validation : this.validations) {
 			if (validation.valid(this.key, this.value, map) == false) {
 				return;
 			}

@@ -8,49 +8,51 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.validation.ListValidation;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class DefaultableGiveTest {
 
 	@Test
 	void testSingleInvalidCase() {
 		MatcherAssert.assertThat(
-			new DefaultableGive<String>("Apple", this.dummyValidation(false)).handle(new ArrayList<>()), 
-			CoreMatchers.equalTo("Apple")
+			new DefaultableGive<String>(this.fruit1, this.dummyValidation(false)).handle(new ArrayList<>()), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
 	@Test
 	void testSingleInvalidAmongMultipleValidCase() {
 		MatcherAssert.assertThat(
-			new DefaultableGive<String>("Apple",
+			new DefaultableGive<String>(this.fruit1,
 				this.dummyValidation(true), 
 				this.dummyValidation(true), 
 				this.dummyValidation(false)
 			).handle(new ArrayList<>()), 
-			CoreMatchers.equalTo("Apple")
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
 	@Test
 	void testSingleValidCase() {
 		MatcherAssert.assertThat(
-			new DefaultableGive<String>("Banana",
+			new DefaultableGive<String>(this.fruit2,
 				this.dummyValidation(true)
-			).handle(this.memory("Apple")), 
-			CoreMatchers.equalTo("Apple")
+			).handle(this.memory(this.fruit1)), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
 	@Test
 	void testMultipleValidCase() {
 		MatcherAssert.assertThat(
-			new DefaultableGive<String>("Banana",
+			new DefaultableGive<String>(this.fruit2,
 				this.dummyValidation(true), 
 				this.dummyValidation(true), 
 				this.dummyValidation(true)
-			).handle(this.memory("Apple")), 
-			CoreMatchers.equalTo("Apple")
+			).handle(this.memory(this.fruit1)), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
@@ -61,4 +63,7 @@ class DefaultableGiveTest {
 	private List<String> memory(final String value) {
 		return new ArrayList<>(Arrays.asList(value));
 	}
+	
+	private final String fruit1 = "Apple";
+	private final String fruit2 = "Banana";
 }

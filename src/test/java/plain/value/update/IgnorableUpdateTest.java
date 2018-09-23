@@ -8,10 +8,11 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.event.ParamEvent;
 import plain.contract.validation.ValueValidation;
-import plain.value.update.IgnorableUpdate;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IgnorableUpdateTest {
 
 	@Test
@@ -20,7 +21,7 @@ class IgnorableUpdateTest {
 		final ValueValidation<String> validation = value -> false;
 
 		// IgnoreableUpdate object.
-		final IgnorableUpdate<String> ignoreableUpdate = new IgnorableUpdate<String>("Apple", validation);
+		final IgnorableUpdate<String> ignoreableUpdate = new IgnorableUpdate<String>(this.fruit1, validation);
 
 		// List to be updated.
 		final List<String> memory = new ArrayList<>();
@@ -41,7 +42,7 @@ class IgnorableUpdateTest {
 		final ValueValidation<String> validation = value -> true;
 
 		// IgnoreableUpdate object.
-		final IgnorableUpdate<String> ignoreableUpdate = new IgnorableUpdate<String>("Apple", validation);
+		final IgnorableUpdate<String> ignoreableUpdate = new IgnorableUpdate<String>(this.fruit1, validation);
 
 		// List to be updated.
 		final List<String> memory = new ArrayList<>();
@@ -53,7 +54,7 @@ class IgnorableUpdateTest {
 		ignoreableUpdate.handle(memory, events);
 
 		// Check if the update has been successful.
-		assertThat(memory.get(0), new IsEqual<>("Apple"));
+		assertThat(memory.get(0), new IsEqual<>(this.fruit1));
 	}
 	
 	@Test
@@ -62,7 +63,7 @@ class IgnorableUpdateTest {
 		final ValueValidation<String> validation = value -> true;
 
 		// IgnoreableUpdate object.
-		final IgnorableUpdate<String> ignoreableUpdate = new IgnorableUpdate<String>("Apple", validation);
+		final IgnorableUpdate<String> ignoreableUpdate = new IgnorableUpdate<String>(this.fruit1, validation);
 
 		// List to be updated.
 		final List<String> memory = new ArrayList<>();
@@ -84,9 +85,11 @@ class IgnorableUpdateTest {
 
 		// Expected list after update.
 		final List<String> expectedList = new ArrayList<>();
-		expectedList.add("Apple");
+		expectedList.add(this.fruit1);
 		
 		// Check the event handling.
 		assertThat(actualList, new IsEqual<>(expectedList));
 	}
+	
+	private final String fruit1 = "Apple";
 }

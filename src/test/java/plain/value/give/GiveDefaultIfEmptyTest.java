@@ -7,31 +7,37 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class GiveDefaultIfEmptyTest {
 
 	@Test
 	void testDefaultValue() {
 		MatcherAssert.assertThat(
-			new GiveDefaultIfEmpty<String>("Apple").handle(new ArrayList<>()), 
-			CoreMatchers.equalTo("Apple")
+			new GiveDefaultIfEmpty<String>(this.fruit1).handle(new ArrayList<>()), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
 	@Test
 	void testExistingValue() {
 		final List<String> memory = new ArrayList<>();
-		memory.add("Apple");
+		memory.add(this.fruit1);
 		MatcherAssert.assertThat(
-			new GiveDefaultIfEmpty<String>("Banana").handle(memory), 
-			CoreMatchers.equalTo("Apple")
+			new GiveDefaultIfEmpty<String>(this.fruit2).handle(memory), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 
 	@Test
 	void testDefaultFromLogic() {
 		MatcherAssert.assertThat(
-			new GiveDefaultIfEmpty<>(() -> "Apple").handle(new ArrayList<>()), 
-			CoreMatchers.equalTo("Apple")
+			new GiveDefaultIfEmpty<>(() -> this.fruit1).handle(new ArrayList<>()), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
+	
+	private final String fruit1 = "Apple";
+	private final String fruit2 = "Banana";
 }

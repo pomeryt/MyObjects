@@ -1,78 +1,41 @@
 package plain.map.task;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hamcrest.core.IsEqual;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import plain.contract.validation.MapGetValidation;
-import plain.map.task.ThrowableGiveFromMap;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class ThrowableGiveFromMapTest {
-
+	
 	@Test
-	void testInvalidCaseWithSingleValidation() {
-		// Prepare for the test.
-		final Map<String, String> map = new HashMap<>();
-		final String key = "test";
-		final String errorMessage = "Invalid.";
-		final MapGetValidation<String, String> validation = (tempKey, tempMap) -> false;
-		final ThrowableGiveFromMap<String, String> throwableGiveFromMap = new ThrowableGiveFromMap<String, String>(key, errorMessage, validation);
-		
-		// Check if it throws exception.
-		final Exception exception = assertThrows(RuntimeException.class, () -> throwableGiveFromMap.handle(map));
-		
-		// Check if the error message is correct.
-		assertThat(exception.getMessage(), new IsEqual<>(errorMessage));
+	void validGive() {
+		final Map<Integer, Integer> map = new HashMap<>();
+		map.put(0, 0);
+		MatcherAssert.assertThat(
+			new ThrowableGiveFromMap<Integer, Integer>(
+				0, this.errorMessage, (key, value) -> true
+			).handle(map), 
+			CoreMatchers.equalTo(0)
+		);
 	}
 	
 	@Test
-	void testValidCaseWithSingleValidation() {
-		// Prepare for the test.
-		final Map<String, String> map = new HashMap<>();
-		final String key = "test";
-		final String errorMessage = "Invalid.";
-		final MapGetValidation<String, String> validation = (tempKey, tempMap) -> true;
-		final ThrowableGiveFromMap<String, String> throwableGiveFromMap = new ThrowableGiveFromMap<String, String>(key, errorMessage, validation);
-		map.put(key, "Apple");
-		
-		// Check if it gives "Apple".
-		assertThat(throwableGiveFromMap.handle(map), new IsEqual<>("Apple"));
+	void invalidGive() {
+		Assertions.assertThrows(
+			RuntimeException.class, 
+			() -> {
+				new ThrowableGiveFromMap<Integer, Integer>(
+					0, this.errorMessage, (key, value) -> false
+				).handle(new HashMap<>());
+			}
+		);
 	}
 	
-	@Test
-	void testInvalidCaseWithMultipleValidations() {
-		// Prepare for the test.
-		final Map<String, String> map = new HashMap<>();
-		final String key = "test";
-		final String errorMessage = "Invalid.";
-		final MapGetValidation<String, String> validation1 = (tempKey, tempMap) -> true;
-		final MapGetValidation<String, String> validation2 = (tempKey, tempMap) -> false;
-		final ThrowableGiveFromMap<String, String> throwableGiveFromMap = new ThrowableGiveFromMap<String, String>(key, errorMessage, validation1, validation2);
-		
-		// Check if it throws exception.
-		final Exception exception = assertThrows(RuntimeException.class, () -> throwableGiveFromMap.handle(map));
-
-		// Check if the error message is correct.
-		assertThat(exception.getMessage(), new IsEqual<>(errorMessage));
-	}
-	
-	@Test
-	void testValidCaseWithMultipleValidations() {
-		// Prepare for the test.
-		final Map<String, String> map = new HashMap<>();
-		final String key = "test";
-		final String errorMessage = "Invalid.";
-		final MapGetValidation<String, String> validation1 = (tempKey, tempMap) -> true;
-		final MapGetValidation<String, String> validation2 = (tempKey, tempMap) -> true;
-		final ThrowableGiveFromMap<String, String> throwableGiveFromMap = new ThrowableGiveFromMap<String, String>(key, errorMessage, validation1, validation2);
-		map.put(key, "Apple");
-
-		// Check if it gives "Apple".
-		assertThat(throwableGiveFromMap.handle(map), new IsEqual<>("Apple"));
-	}
+	private final String errorMessage = "Invalid.";
 }

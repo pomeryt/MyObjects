@@ -11,7 +11,7 @@ import plain.contract.validation.ValueValidation;
 public final class IsValueNullSafe<T> implements ValueValidation<T> {
 
 	@Override
-	public boolean valid(T value) {
+	public boolean valid(final T value) {
 		// Return false if the value is null.
 		if (value == null) {
 			return false;

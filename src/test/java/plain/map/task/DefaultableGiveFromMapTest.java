@@ -7,27 +7,29 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.validation.MapGetValidation;
 
+@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class DefaultableGiveFromMapTest {
 
 	@Test
 	void testSingleInvalidCase() {
 		MatcherAssert.assertThat(
-			new DefaultableGiveFromMap<String, String>("One", "Apple", this.dummyValidation(false)).handle(new HashMap<>()), 
-			CoreMatchers.equalTo("Apple")
+			new DefaultableGiveFromMap<String, String>(this.key1, this.fruit1, this.dummyValidation(false)).handle(new HashMap<>()), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
 	@Test
 	void testSingleInvalidAmongMultipleValidCase() {
 		MatcherAssert.assertThat(
-			new DefaultableGiveFromMap<String, String>("One", "Apple", 
+			new DefaultableGiveFromMap<String, String>(this.key1, this.fruit1, 
 				this.dummyValidation(true), 
 				this.dummyValidation(true), 
 				this.dummyValidation(false)
 			).handle(new HashMap<>()), 
-			CoreMatchers.equalTo("Apple")
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
@@ -35,9 +37,9 @@ class DefaultableGiveFromMapTest {
 	void testSingleValidCase() {
 		MatcherAssert.assertThat(
 			new DefaultableGiveFromMap<String, String>(
-				"One", "Banana", this.dummyValidation(true)
-			).handle(this.mapWithDefaultPair("One", "Apple")), 
-			CoreMatchers.equalTo("Apple")
+				this.key1, this.fruit2, this.dummyValidation(true)
+			).handle(this.mapWithDefaultPair(this.key1, this.fruit1)), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
@@ -45,12 +47,12 @@ class DefaultableGiveFromMapTest {
 	void testMultipleValidCase() {
 		MatcherAssert.assertThat(
 			new DefaultableGiveFromMap<String, String>(
-				"One", "Banana", 
+				this.key1, this.fruit2, 
 				this.dummyValidation(true), 
 				this.dummyValidation(true), 
 				this.dummyValidation(true)
-			).handle(this.mapWithDefaultPair("One", "Apple")), 
-			CoreMatchers.equalTo("Apple")
+			).handle(this.mapWithDefaultPair(this.key1, this.fruit1)), 
+			CoreMatchers.equalTo(this.fruit1)
 		);
 	}
 	
@@ -63,4 +65,8 @@ class DefaultableGiveFromMapTest {
 		map.put(key, value);
 		return map;
 	}
+	
+	private final String key1 = "One";
+	private final String fruit1 = "Apple";
+	private final String fruit2 = "Banana";
 }
