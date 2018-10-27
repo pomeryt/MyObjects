@@ -9,6 +9,7 @@ plugins {
 	id 'eclipse'
 	id 'jacoco'
 	id 'com.github.spotbugs' version '1.6.4'
+	id 'pmd'
 }
 
 repositories {
@@ -96,22 +97,15 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 	}
 }
 
-apply plugin: 'pmd'
 pmd {
-	toolVersion = '5.1.2'
+	toolVersion = '6.8.0'
 	ignoreFailures = false
-	ruleSets = [
-		'java-basic',
-		'java-braces',
-		'java-clone',
-		'java-empty',
-		'java-finalizers',
-		'java-imports',
-		'java-junit',
-		'java-naming',
-		'java-strings',
-		'java-typeresolution',
-		'java-unnecessary',
-		'java-unusedcode'
-	]
+	ruleSetFiles = files("config/pmd/ruleSet.xml")
+	ruleSets = []
+}
+tasks.withType(Pmd) {
+	reports {
+		xml.enabled false
+		html.enabled true
+	}
 }
