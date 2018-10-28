@@ -30,7 +30,7 @@ public final class ThrowableGive<T> implements ReturnTask<T, List<T>> {
 	public T handle(final List<T> memory) {
 		// Make sure the value in the memory is valid.
 		for (final ListValidation<T> validation : this.validations) {
-			if (validation.valid(memory) == false) {
+			if (!validation.valid(memory)) {
 				throw new RuntimeException(this.errorMessage);
 			}
 		}

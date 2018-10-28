@@ -33,7 +33,7 @@ public final class IgnorableUpdate<T> implements TaskOfUpdateable<T> {
 	public void handle(final List<T> memory, final List<ParamEvent<T>> events) {
 		// Make sure the value is valid.
 		for (final ValueValidation<T> validation : this.validations) {
-			if (validation.valid(this.value) == false) {
+			if (!validation.valid(this.value)) {
 				return;
 			}
 		}

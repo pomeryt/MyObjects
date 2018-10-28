@@ -33,7 +33,7 @@ public final class ThrowableGiveFromMap<K, V> implements ReturnTask<V, Map<K, V>
 	public V handle(final Map<K, V> map) {
 		// Make sure map.get(K key) operation is valid.
 		for (final MapGetValidation<K, V> validation : this.validations) {
-			if (validation.valid(this.key, map) == false) {
+			if (!validation.valid(this.key, map)) {
 				throw new RuntimeException(this.errorMessage);
 			}
 		}

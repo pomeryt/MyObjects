@@ -30,7 +30,7 @@ public final class ConditionalRunForMap<K, V> implements VoidTask<GiveableMap<K,
 	public void handle(final GiveableMap<K, V> giveableMap) {
 		// Skip if the map does not meet the conditions.
 		for (final GiveableMapValidation<K, V> validation : this.validations) {
-			if (validation.valid(giveableMap) == false) {
+			if (!validation.valid(giveableMap)) {
 				return;
 			}
 		}

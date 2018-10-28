@@ -34,7 +34,7 @@ public final class IgnorablePutInMap<K, V> implements VoidTask<Map<K, V>> {
 	@Override
 	public void handle(final Map<K, V> map) {
 		for (final MapPutValidation<K, V> validation : this.validations) {
-			if (validation.valid(this.key, this.value, map) == false) {
+			if (!validation.valid(this.key, this.value, map)) {
 				return;
 			}
 		}
