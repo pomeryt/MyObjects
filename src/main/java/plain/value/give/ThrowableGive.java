@@ -23,7 +23,7 @@ public final class ThrowableGive<T> implements ReturnTask<T, List<T>> {
 	@SafeVarargs
 	public ThrowableGive(final String errorMessage, final ListValidation<T>... validations) {
 		this.errorMessage = errorMessage;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override

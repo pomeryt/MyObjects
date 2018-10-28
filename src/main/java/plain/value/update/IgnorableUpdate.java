@@ -26,7 +26,7 @@ public final class IgnorableUpdate<T> implements TaskOfUpdateable<T> {
 	@SafeVarargs
 	public IgnorableUpdate(final T value, final ValueValidation<T>... validations) {
 		this.value = value;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 
 	@Override

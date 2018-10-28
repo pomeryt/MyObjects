@@ -25,7 +25,7 @@ public final class DefaultableGiveFromMap<K, V> implements ReturnTask<V, Map<K, 
 	public DefaultableGiveFromMap(final K key, final V defaultValue, final MapGetValidation<K, V>...validations) {
 		this.key = key;
 		this.defaultValue = defaultValue;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override

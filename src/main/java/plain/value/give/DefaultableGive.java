@@ -22,7 +22,7 @@ public final class DefaultableGive<T> implements ReturnTask<T, List<T>> {
 	@SafeVarargs
 	public DefaultableGive(final T defaultValue, final ListValidation<T>...validations) {
 		this.defaultValue = defaultValue;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override

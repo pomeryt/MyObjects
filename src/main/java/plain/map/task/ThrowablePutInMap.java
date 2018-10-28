@@ -28,7 +28,7 @@ public final class ThrowablePutInMap<K, V> implements VoidTask<Map<K, V>> {
 		this.key = key;
 		this.value = value;
 		this.errorMessage = errorMessage;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override

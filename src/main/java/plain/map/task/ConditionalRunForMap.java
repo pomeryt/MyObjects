@@ -23,7 +23,7 @@ public final class ConditionalRunForMap<K, V> implements VoidTask<GiveableMap<K,
 	@SafeVarargs
 	public ConditionalRunForMap(final PlainTask task, final GiveableMapValidation<K, V>... validations) {
 		this.task = task;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override

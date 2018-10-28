@@ -42,7 +42,7 @@ public final class ValueOnlyUpdate<T> implements TaskOfUpdateable<T> {
 	public ValueOnlyUpdate(final T value, final String errorMessage, final ValueValidation<T>... validations) {
 		this.value = value;
 		this.errorMessage = errorMessage;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override

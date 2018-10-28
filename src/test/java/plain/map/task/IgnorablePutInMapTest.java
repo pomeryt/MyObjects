@@ -11,13 +11,13 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.validation.MapPutValidation;
 
 @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
-class IgnoreablePutInMapTest {
+class IgnorablePutInMapTest {
 
 	@Test
 	void testSingleInvalidCase() {
 		final Map<String, String> map = new HashMap<>();
 		map.put(this.key1, this.fruit1);
-		new IgnoreablePutInMap<String, String>(this.key1, this.fruit2, this.dummyValidation(false)
+		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, this.dummyValidation(false)
 		).handle(map);
 		MatcherAssert.assertThat(
 			map.get(this.key1), 
@@ -29,7 +29,7 @@ class IgnoreablePutInMapTest {
 	void testSingleInvalidAmongMultipleValidCase() {
 		final Map<String, String> map = new HashMap<>();
 		map.put(this.key1, this.fruit1);
-		new IgnoreablePutInMap<String, String>(this.key1, this.fruit2, 
+		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, 
 			this.dummyValidation(true), 
 			this.dummyValidation(true), 
 			this.dummyValidation(false)
@@ -44,7 +44,7 @@ class IgnoreablePutInMapTest {
 	void testSingleValidCase() {
 		final Map<String, String> map = new HashMap<>();
 		map.put(this.key1, this.fruit1);
-		new IgnoreablePutInMap<String, String>(this.key1, this.fruit2, this.dummyValidation(true)
+		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, this.dummyValidation(true)
 		).handle(map);
 		MatcherAssert.assertThat(
 			map.get(this.key1), 
@@ -56,7 +56,7 @@ class IgnoreablePutInMapTest {
 	void testMultipleValidCase() {
 		final Map<String, String> map = new HashMap<>();
 		map.put(this.key1, this.fruit1);
-		new IgnoreablePutInMap<String, String>(this.key1, this.fruit2, 
+		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, 
 			this.dummyValidation(true), 
 			this.dummyValidation(true), 
 			this.dummyValidation(true)

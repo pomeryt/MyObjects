@@ -26,7 +26,7 @@ public final class ThrowableGiveFromMap<K, V> implements ReturnTask<V, Map<K, V>
 	public ThrowableGiveFromMap(final K key, final String errorMessage, final MapGetValidation<K, V>... validations) {
 		this.key = key;
 		this.errorMessage = errorMessage;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override

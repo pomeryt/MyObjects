@@ -28,7 +28,7 @@ public final class ThrowableUpdate<T> implements TaskOfUpdateable<T> {
 	public ThrowableUpdate(final T value, final String errorMessage, final ValueValidation<T>... validations) {
 		this.value = value;
 		this.errorMessage = errorMessage;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 
 	@Override

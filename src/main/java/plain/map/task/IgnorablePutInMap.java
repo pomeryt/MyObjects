@@ -16,7 +16,7 @@ import plain.contract.validation.MapPutValidation;
  * @param <K> The type of key in map.
  * @param <V> The type of value in map.
  */
-public final class IgnoreablePutInMap<K, V> implements VoidTask<Map<K, V>> {
+public final class IgnorablePutInMap<K, V> implements VoidTask<Map<K, V>> {
 	
 	/**
 	 * @param key of pair.
@@ -25,10 +25,10 @@ public final class IgnoreablePutInMap<K, V> implements VoidTask<Map<K, V>> {
 	 * @since 1.0.0
 	 */
 	@SafeVarargs
-	public IgnoreablePutInMap(final K key, final V value, final MapPutValidation<K, V>...validations) {
+	public IgnorablePutInMap(final K key, final V value, final MapPutValidation<K, V>...validations) {
 		this.key = key;
 		this.value = value;
-		this.validations = validations;
+		this.validations = validations.clone();
 	}
 	
 	@Override
