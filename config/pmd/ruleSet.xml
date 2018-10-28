@@ -23,8 +23,15 @@
 	</rule>
 	<rule ref="category/java/errorprone.xml">
 		<exclude name="BeanMembersShouldSerialize" />
+		<exclude name="BeanMembersShouldSerialize" />
 	</rule>
 	<rule ref="category/java/multithreading.xml" />
 	<rule ref="category/java/performance.xml" />
 	<rule ref="category/java/security.xml" />
+	
+	<rule ref="rulesets/java/controversial.xml/DataflowAnomalyAnalysis">
+		<properties>
+			<property name="violationSuppressRegex" value="^Found 'UR'-anomaly.*"/>
+		</properties>
+	</rule>
 </ruleset>
