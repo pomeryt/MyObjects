@@ -10,6 +10,7 @@ import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
 import plain.contract.map.GiveableMap;
+import plain.contract.task.PlainTask;
 import plain.contract.task.ReturnTask;
 import plain.contract.validation.GiveableMapValidation;
 import plain.number.count.PlainCount;
@@ -22,7 +23,7 @@ class ConditionalRunnableMapTest {
 		final PlainCount count = new PlainCount();
 		
 		// This will increment the counter by 1 when it is executed.
-		final Runnable runnable = () -> count.increment();
+		final PlainTask task = () -> count.increment();
 		
 		// Always valid condition.
 		final GiveableMapValidation<String, Boolean> validation = giveableMap -> true;
@@ -46,7 +47,7 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(task, validation);
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has been executed correctly.
@@ -59,7 +60,7 @@ class ConditionalRunnableMapTest {
 		final PlainCount count = new PlainCount();
 		
 		// This will increment the counter by 1 when it is executed.
-		final Runnable runnable = () -> count.increment();
+		final PlainTask task = () -> count.increment();
 		
 		// Always valid conditions.
 		final GiveableMapValidation<String, Boolean> validation1 = giveableMap -> true;
@@ -86,7 +87,7 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation1, validation2);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(task, validation1, validation2);
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has been executed correctly.
@@ -99,7 +100,7 @@ class ConditionalRunnableMapTest {
 		final PlainCount count = new PlainCount();
 		
 		// This will increment the counter by 1 when it is executed.
-		final Runnable runnable = () -> count.increment();
+		final PlainTask task = () -> count.increment();
 		
 		// Always invalid condition.
 		final GiveableMapValidation<String, Boolean> validation = giveableMap -> false;
@@ -126,7 +127,7 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(task, validation);
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has not been executed.
@@ -139,7 +140,7 @@ class ConditionalRunnableMapTest {
 		final PlainCount count = new PlainCount();
 		
 		// This will increment the counter by 1 when it is executed.
-		final Runnable runnable = () -> count.increment();
+		final PlainTask task = () -> count.increment();
 		
 		// Valid and invalid conditions.
 		final GiveableMapValidation<String, Boolean> validation1 = giveableMap -> true;
@@ -165,7 +166,7 @@ class ConditionalRunnableMapTest {
 		};
 		
 		// Run the main task.
-		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(runnable, validation1, validation2);
+		final ConditionalRunForMap<String, Boolean> conditionalRun = new ConditionalRunForMap<>(task, validation1, validation2);
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has not been executed.
