@@ -12,6 +12,7 @@
 		<exclude name="CommentDefaultAccessModifier" />
 		<exclude name="UnnecessaryModifier" />
 		<exclude name="AvoidFinalLocalVariable" />
+		<exclude name="OnlyOneReturn" />
 	</rule>
 	<rule ref="category/java/design.xml">
 		<exclude name="AvoidCatchingGenericException" />
