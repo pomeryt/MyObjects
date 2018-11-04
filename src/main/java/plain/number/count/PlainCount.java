@@ -27,9 +27,9 @@ public final class PlainCount implements SimpleCount {
 	
 	/**
 	 * @param memory An integer array which contains only one value for initial count value.
-	 * @since 1.0.0
+	 * @since 1.0.1
 	 */
-	public PlainCount(final int[] memory) {
+	public PlainCount(final int... memory) {
 		this.memory = memory.clone();
 	}
 	
