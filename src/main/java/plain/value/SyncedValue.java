@@ -9,7 +9,7 @@ import plain.contract.update.task.TaskOfUpdateable;
 /**
  * Thread-safe version of {@link EventValue}. 
  * @author Rin
- * @version 2.0.0
+ * @version 2.0.1
  * @param <T> The type of value.
  */
 public final class SyncedValue<T> implements LiveValue<T> {
@@ -27,28 +27,38 @@ public final class SyncedValue<T> implements LiveValue<T> {
 	}
 	
 	@Override
-	public synchronized void update(final TaskOfUpdateable<T> task) {
-		this.liveValue.update(task);
+	public void update(final TaskOfUpdateable<T> task) {
+		synchronized (this) {
+			this.liveValue.update(task);
+		}
 	}
 
 	@Override
-	public synchronized T value(final ReturnTask<T, List<T>> task) {
-		return this.liveValue.value(task);
+	public T value(final ReturnTask<T, List<T>> task) {
+		synchronized (this) {
+			return this.liveValue.value(task);
+		}
 	}
 
 	@Override
-	public synchronized void update(final T value) {
-		this.liveValue.update(value);
+	public void update(final T value) {
+		synchronized (this) {
+			this.liveValue.update(value);
+		}
 	}
 
 	@Override
-	public synchronized void addEvent(final ParamEvent<T> event) {
-		this.liveValue.addEvent(event);
+	public void addEvent(final ParamEvent<T> event) {
+		synchronized (this) {
+			this.liveValue.addEvent(event);
+		}
 	}
 
 	@Override
-	public synchronized T value() {
-		return this.liveValue.value();
+	public T value() {
+		synchronized (this) {
+			return this.liveValue.value();
+		}
 	}
 	
 	private final LiveValue<T> liveValue;
