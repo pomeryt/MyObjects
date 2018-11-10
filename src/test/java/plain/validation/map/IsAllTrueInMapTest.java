@@ -11,11 +11,9 @@ import java.util.Set;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.map.GiveableMap;
 import plain.contract.task.ReturnTask;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IsAllTrueInMapTest {
 
 	@Test
@@ -46,7 +44,11 @@ class IsAllTrueInMapTest {
 		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>();
 		
 		// Check if the map is valid.
-		assertThat(isAllTrueInMap.valid(giveableMap), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if all values are true.",
+			isAllTrueInMap.valid(giveableMap), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -82,7 +84,11 @@ class IsAllTrueInMapTest {
 		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>(selectedKeys);
 		
 		// Check if the map is valid.
-		assertThat(isAllTrueInMap.valid(giveableMap), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if all selected values are true.",
+			isAllTrueInMap.valid(giveableMap), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -113,7 +119,11 @@ class IsAllTrueInMapTest {
 		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>();
 		
 		// Check if the map is invalid.
-		assertThat(isAllTrueInMap.valid(giveableMap), new IsEqual<>(false));
+		assertThat(
+			"The map should be invalid if it has false.",
+			isAllTrueInMap.valid(giveableMap), 
+			new IsEqual<>(false)
+		);
 	}
 
 	@Test
@@ -149,7 +159,11 @@ class IsAllTrueInMapTest {
 		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>(selectedKeys);
 		
 		// Check if the map is invalid.
-		assertThat(isAllTrueInMap.valid(giveableMap), new IsEqual<>(false));
+		assertThat(
+			"The the should be invalid if there is a false in the selected values.",
+			isAllTrueInMap.valid(giveableMap), 
+			new IsEqual<>(false)
+		);
 	}
 	
 	private final String fruit1 = "Apple";

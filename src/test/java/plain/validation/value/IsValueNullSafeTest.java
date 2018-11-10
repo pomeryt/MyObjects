@@ -13,7 +13,10 @@ class IsValueNullSafeTest {
 		final IsValueNullSafe<String> isValueNullSafe = new IsValueNullSafe<>();
 		
 		// Check if "Apple" is valid.
-		assertThat(isValueNullSafe.valid("Apple"), new IsEqual<>(true));
+		assertThat(
+			"The value should be valid if it is not null.",
+			isValueNullSafe.valid("Apple"), 
+			new IsEqual<>(true));
 	}
 	
 	@Test
@@ -22,7 +25,11 @@ class IsValueNullSafeTest {
 		final IsValueNullSafe<String> isValueNullSafe = new IsValueNullSafe<>();
 
 		// Check if null is invalid.
-		assertThat(isValueNullSafe.valid(null), new IsEqual<>(false));
+		assertThat(
+			"The value should be invalid if it is null.",
+			isValueNullSafe.valid(null), 
+			new IsEqual<>(false)
+		);
 	}
 
 }

@@ -17,8 +17,16 @@ class EventOnlyUpdateTest {
 		for (int x = 0; x < 3; x++) {
 			number.update(new EventOnlyUpdate<>());
 		}
-		MatcherAssert.assertThat(number.value(), CoreMatchers.equalTo(0));
-		MatcherAssert.assertThat(count.value(), CoreMatchers.equalTo(3));
+		MatcherAssert.assertThat(
+			"It should not change the value.",
+			number.value(), 
+			CoreMatchers.equalTo(0)
+		);
+		MatcherAssert.assertThat(
+			"The event should have been handled.",
+			count.value(), 
+			CoreMatchers.equalTo(3)
+		);
 	}
 
 }

@@ -17,7 +17,11 @@ class IsListFilledTest {
 		list.add("Apple");
 		
 		// Check if the list is valid.
-		assertThat(new IsListFilled<String>().valid(list), new IsEqual<>(true));
+		assertThat(
+			"Filled list should be valid.", 
+			new IsListFilled<String>().valid(list), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -26,7 +30,11 @@ class IsListFilledTest {
 		final List<String> list = new ArrayList<>();
 		
 		// Check if the list is invalid.
-		assertThat(new IsListFilled<String>().valid(list), new IsEqual<>(false));
+		assertThat(
+			"Empty list should be invalid.",
+			new IsListFilled<String>().valid(list), 
+			new IsEqual<>(false)
+		);
 	}
 
 }

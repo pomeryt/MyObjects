@@ -20,7 +20,11 @@ class IsListNullSafeTest {
 		list.add("Apple");
 		
 		// Check if the list is valid.
-		assertThat(isListNullSafe.valid(list), new IsEqual<>(true));
+		assertThat(
+			"The list should be valid if it doesn't have null.",
+			isListNullSafe.valid(list), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -33,7 +37,11 @@ class IsListNullSafeTest {
 		list.add(null);
 		
 		// Check if the list is invalid.
-		assertThat(isListNullSafe.valid(list), new IsEqual<>(false));
+		assertThat(
+			"The should be invalid if it has null.",
+			isListNullSafe.valid(list), 
+			new IsEqual<>(false)
+		);
 	}
 
 }

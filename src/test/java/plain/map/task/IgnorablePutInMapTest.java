@@ -7,10 +7,8 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.validation.MapPutValidation;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IgnorablePutInMapTest {
 
 	@Test

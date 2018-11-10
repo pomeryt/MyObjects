@@ -20,7 +20,11 @@ class PlainGiveTest {
 		memory.add("Apple");
 		
 		// Check if PlainGive object returns the first element of the list.
-		assertThat(plainGive.handle(memory), new IsEqual<>("Apple"));
+		assertThat(
+			"It should give the value.", 
+			plainGive.handle(memory), 
+			new IsEqual<>("Apple")
+		);
 	}
 
 }

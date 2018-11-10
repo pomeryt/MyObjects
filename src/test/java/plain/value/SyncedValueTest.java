@@ -38,9 +38,21 @@ class SyncedValueTest {
 		}
 		threads.forEach(Thread::start);
 		
-		MatcherAssert.assertThat(overlaps.get(), Matchers.greaterThan(0));
-		MatcherAssert.assertThat(exceptions.size(), Matchers.is(0));
-		MatcherAssert.assertThat(fruit.value(), Matchers.is("Apple"));
+		MatcherAssert.assertThat(
+			"Overlaps should be greater than 0.", 
+			overlaps.get(), 
+			Matchers.greaterThan(0)
+		);
+		MatcherAssert.assertThat(
+			"No exception should be thrown.",
+			exceptions.size(), 
+			Matchers.is(0)
+		);
+		MatcherAssert.assertThat(
+			"The value should be returned.",
+			fruit.value(), 
+			Matchers.is("Apple")
+		);
 	}
 
 }

@@ -11,11 +11,9 @@ import java.util.Set;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.map.GiveableMap;
 import plain.contract.task.ReturnTask;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IsAllFalseInMapTest {
 
 	// Dummy GiveableMap object to be validated.
@@ -48,7 +46,11 @@ class IsAllFalseInMapTest {
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>();
 		
 		// Check if the map is valid.
-		assertThat(isAllFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if all values are false.",
+			isAllFalseInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -68,7 +70,11 @@ class IsAllFalseInMapTest {
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>(selectedKeys);
 		
 		// Check if the map is valid.
-		assertThat(isAllFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if all selected values are false.",
+			isAllFalseInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -83,7 +89,11 @@ class IsAllFalseInMapTest {
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>();
 		
 		// Check if the map is invalid.
-		assertThat(isAllFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(false));
+		assertThat(
+			"The map should be invalid if it has true.",
+			isAllFalseInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(false)
+		);
 	}
 
 	@Test
@@ -103,7 +113,11 @@ class IsAllFalseInMapTest {
 		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>(selectedKeys);
 		
 		// Check if the map is invalid.
-		assertThat(isAllFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(false));
+		assertThat(
+			"The map should be invalid if there is a true in selected values.",
+			isAllFalseInMap.valid(this.giveableMap(map)),
+			new IsEqual<>(false)
+		);
 	}
 	
 	private final String fruit1 = "Apple";

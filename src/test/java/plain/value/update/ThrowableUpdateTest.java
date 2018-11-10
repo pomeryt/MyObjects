@@ -12,9 +12,13 @@ class ThrowableUpdateTest {
 	@Test
 	void throwWhenInvalid() {
 		final EventValue<Integer> number = new EventValue<>(0);
-		Assertions.assertThrows(RuntimeException.class, () -> {
-			number.update(new ThrowableUpdate<>(1, "Invalid", value -> false));
-		});
+		Assertions.assertThrows(
+			RuntimeException.class, 
+			() -> {
+				number.update(new ThrowableUpdate<>(1, "Invalid", value -> false));
+			},
+			"It should throw exception if it's invalid."
+		);
 	}
 	
 	@Test
@@ -22,7 +26,9 @@ class ThrowableUpdateTest {
 		final EventValue<Integer> number = new EventValue<>(0);
 		number.update(new ThrowableUpdate<>(1, "Invalid", value -> true));
 		MatcherAssert.assertThat(
-			number.value(), CoreMatchers.equalTo(1)
+			"The value should have been updated because it was valid.", 
+			number.value(), 
+			CoreMatchers.equalTo(1)
 		);
 	}
 

@@ -8,11 +8,9 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.event.ParamEvent;
 import plain.contract.validation.ValueValidation;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IgnorableUpdateTest {
 
 	@Test
@@ -33,7 +31,11 @@ class IgnorableUpdateTest {
 		ignoreableUpdate.handle(memory, events);
 
 		// Check if the update has been ignored.
-		assertThat(memory.size(), new IsEqual<>(0));
+		assertThat(
+			"The update should have been ignored because it was invalid.", 
+			memory.size(), 
+			new IsEqual<>(0)
+		);
 	}
 
 	@Test
@@ -54,7 +56,11 @@ class IgnorableUpdateTest {
 		ignoreableUpdate.handle(memory, events);
 
 		// Check if the update has been successful.
-		assertThat(memory.get(0), new IsEqual<>(this.fruit1));
+		assertThat(
+			"The value should have been upadted because it was valid.", 
+			memory.get(0), 
+			new IsEqual<>(this.fruit1)
+		);
 	}
 	
 	@Test
@@ -88,7 +94,11 @@ class IgnorableUpdateTest {
 		expectedList.add(this.fruit1);
 		
 		// Check the event handling.
-		assertThat(actualList, new IsEqual<>(expectedList));
+		assertThat(
+			"The event should have been handled.", 
+			actualList, 
+			new IsEqual<>(expectedList)
+		);
 	}
 	
 	private final String fruit1 = "Apple";

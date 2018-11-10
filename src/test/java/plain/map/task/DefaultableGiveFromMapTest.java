@@ -7,15 +7,14 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.validation.MapGetValidation;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class DefaultableGiveFromMapTest {
 
 	@Test
 	void testSingleInvalidCase() {
 		MatcherAssert.assertThat(
+			"It should give default value if the validation is not met.",
 			new DefaultableGiveFromMap<String, String>(this.key1, this.fruit1, this.dummyValidation(false)).handle(new HashMap<>()), 
 			CoreMatchers.equalTo(this.fruit1)
 		);
@@ -24,6 +23,7 @@ class DefaultableGiveFromMapTest {
 	@Test
 	void testSingleInvalidAmongMultipleValidCase() {
 		MatcherAssert.assertThat(
+			"It should give default value if any validation is not met.",
 			new DefaultableGiveFromMap<String, String>(this.key1, this.fruit1, 
 				this.dummyValidation(true), 
 				this.dummyValidation(true), 
@@ -36,6 +36,7 @@ class DefaultableGiveFromMapTest {
 	@Test
 	void testSingleValidCase() {
 		MatcherAssert.assertThat(
+			"It should give value from the map if the validation is met.",
 			new DefaultableGiveFromMap<String, String>(
 				this.key1, this.fruit2, this.dummyValidation(true)
 			).handle(this.mapWithDefaultPair(this.key1, this.fruit1)), 
@@ -46,6 +47,7 @@ class DefaultableGiveFromMapTest {
 	@Test
 	void testMultipleValidCase() {
 		MatcherAssert.assertThat(
+			"It should give value from the map if all validations are met.",
 			new DefaultableGiveFromMap<String, String>(
 				this.key1, this.fruit2, 
 				this.dummyValidation(true), 

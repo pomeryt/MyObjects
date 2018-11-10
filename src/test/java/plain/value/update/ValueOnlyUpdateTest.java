@@ -15,7 +15,11 @@ class ValueOnlyUpdateTest {
 			throw new UnsupportedOperationException("You are not supposed to call this method.");
 		});
 		number.update(new ValueOnlyUpdate<>(0));
-		MatcherAssert.assertThat(number.value(), CoreMatchers.equalTo(0));
+		MatcherAssert.assertThat(
+			"The valud should have been updated without handling the event.", 
+			number.value(), 
+			CoreMatchers.equalTo(0)
+		);
 	}
 
 }

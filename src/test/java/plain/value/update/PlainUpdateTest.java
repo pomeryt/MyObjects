@@ -8,10 +8,8 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.event.ParamEvent;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class PlainUpdateTest {
 
 	@Test
@@ -30,7 +28,11 @@ class PlainUpdateTest {
 		plainUpdate.handle(memory, events);
 
 		// Check if the update has been successful.
-		assertThat(memory.get(0), new IsEqual<>(this.fruit1));
+		assertThat(
+			"The value should been updated.", 
+			memory.get(0), 
+			new IsEqual<>(this.fruit1)
+		);
 	}
 	
 	@Test
@@ -62,7 +64,11 @@ class PlainUpdateTest {
 		expectedList.add(this.fruit1);
 		
 		// Check the event handling.
-		assertThat(actualList, new IsEqual<>(expectedList));
+		assertThat(
+			"The event should have been handled.", 
+			actualList, 
+			new IsEqual<>(expectedList)
+		);
 	}
 
 	private final String fruit1 = "Apple";

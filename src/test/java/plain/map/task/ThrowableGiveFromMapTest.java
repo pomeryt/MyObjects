@@ -8,9 +8,6 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class ThrowableGiveFromMapTest {
 	
 	@Test
@@ -18,6 +15,7 @@ class ThrowableGiveFromMapTest {
 		final Map<Integer, Integer> map = new HashMap<>();
 		map.put(0, 0);
 		MatcherAssert.assertThat(
+			"It should give the value if the validation is met.",
 			new ThrowableGiveFromMap<Integer, Integer>(
 				0, this.errorMessage, (key, value) -> true
 			).handle(map), 
@@ -33,7 +31,8 @@ class ThrowableGiveFromMapTest {
 				new ThrowableGiveFromMap<Integer, Integer>(
 					0, this.errorMessage, (key, value) -> false
 				).handle(new HashMap<>());
-			}
+			},
+			"It should throw exception if the validation is not met."
 		);
 	}
 	

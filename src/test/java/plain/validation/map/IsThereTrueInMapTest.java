@@ -11,11 +11,9 @@ import java.util.Set;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.map.GiveableMap;
 import plain.contract.task.ReturnTask;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IsThereTrueInMapTest {
 	
 	@Test
@@ -30,7 +28,11 @@ class IsThereTrueInMapTest {
 		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>();
 		
 		// Check if the map is valid.
-		assertThat(isThereTrueInMap.valid(this.giveableMap(map)), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if there is a true.",
+			isThereTrueInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(true)
+		);
 	}
 		
 	@Test
@@ -50,7 +52,11 @@ class IsThereTrueInMapTest {
 		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>(selectedKeys);
 		
 		// Check if the map is valid.
-		assertThat(isThereTrueInMap.valid(this.giveableMap(map)), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if there is a true in the selected values.",
+			isThereTrueInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(true)
+		);
 	}
 		
 	@Test
@@ -65,7 +71,11 @@ class IsThereTrueInMapTest {
 		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>();
 		
 		// Check if the map is invalid.
-		assertThat(isThereTrueInMap.valid(this.giveableMap(map)), new IsEqual<>(false));
+		assertThat(
+			"The map should be invalid if it does not have true.",
+			isThereTrueInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(false)
+		);
 	}
 
 	@Test
@@ -85,7 +95,11 @@ class IsThereTrueInMapTest {
 		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>(selectedKeys);
 		
 		// Check if the map is invalid.
-		assertThat(isThereTrueInMap.valid(this.giveableMap(map)), new IsEqual<>(false));
+		assertThat(
+			"The map should be invalid if there is no true in the selected values.",
+			isThereTrueInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(false)
+		);
 	}
 	
 	private GiveableMap<String, Boolean> giveableMap(final Map<String, Boolean> map) {

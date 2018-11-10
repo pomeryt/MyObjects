@@ -31,7 +31,11 @@ class ThrowableGiveTest {
 		memory.add("Apple");
 		
 		// Check if ThrowableGive object returns "Apple"
-		assertThat(throwableGive.handle(memory), new IsEqual<>("Apple"));
+		assertThat(
+			"It should give the value from memory.",
+			throwableGive.handle(memory), 
+			new IsEqual<>("Apple")
+		);
 	}
 	
 	@Test
@@ -48,7 +52,11 @@ class ThrowableGiveTest {
 		final ThrowableGive<String> throwableGive = new ThrowableGive<>("Invalid.", validation);
 		
 		// Check if the ThrowableGive object throws RuntimeException.
-		assertThrows(RuntimeException.class, () -> throwableGive.handle(new ArrayList<>()));
+		assertThrows(
+			RuntimeException.class, 
+			() -> throwableGive.handle(new ArrayList<>()),
+			"It should throw exception when it's invalid."
+		);
 	}
 
 }

@@ -18,7 +18,11 @@ class IsKeyRegisteredInMapTest {
 		final IsKeyRegisteredInMap<String, String> isKeyRegistered = new IsKeyRegisteredInMap<>();
 		
 		// Check if the key has been registered in map.
-		assertThat(isKeyRegistered.valid("test", map), new IsEqual<>(true));
+		assertThat(
+			"The key should be valid if it exists in the map.",
+			isKeyRegistered.valid("test", map), 
+			new IsEqual<>(true)
+		);
 	}
 
 	@Test
@@ -28,6 +32,10 @@ class IsKeyRegisteredInMapTest {
 		final IsKeyRegisteredInMap<String, String> isKeyRegistered = new IsKeyRegisteredInMap<>();
 		
 		// Check if the key has not been registered in map.
-		assertThat(isKeyRegistered.valid("test", map), new IsEqual<>(false));
+		assertThat(
+			"The key should be invalid if it does not exist in the map.",
+			isKeyRegistered.valid("test", map), 
+			new IsEqual<>(false)
+		);
 	}
 }

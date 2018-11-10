@@ -51,7 +51,7 @@ class ConditionalRunnableMapTest {
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has been executed correctly.
-		assertThat(count.value(), new IsEqual<>(1));
+		assertThat("It should've ran the task if it was valid.", count.value(), new IsEqual<>(1));
 	}
 	
 	@Test
@@ -91,7 +91,7 @@ class ConditionalRunnableMapTest {
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has been executed correctly.
-		assertThat(count.value(), new IsEqual<>(1));
+		assertThat("It should've ran the task if all validations were met.", count.value(), new IsEqual<>(1));
 	}
 	
 	@Test
@@ -131,7 +131,7 @@ class ConditionalRunnableMapTest {
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has not been executed.
-		assertThat(count.value(), new IsEqual<>(0));
+		assertThat("It should've not ran the task if it was not valid.", count.value(), new IsEqual<>(0));
 	}
 	
 	@Test
@@ -170,7 +170,7 @@ class ConditionalRunnableMapTest {
 		conditionalRun.handle(giveableMap);
 		
 		// Check if the runnable has not been executed.
-		assertThat(count.value(), new IsEqual<>(0));
+		assertThat("It should've not ran the task if any validation was not met.", count.value(), new IsEqual<>(0));
 	}
 
 }

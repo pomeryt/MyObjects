@@ -8,12 +8,10 @@ import java.util.List;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.map.task.ConditionalRunForMap;
 import plain.number.count.PlainCount;
 import plain.validation.map.IsAllTrueInMap;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class FlagMapTest {
 
 	@Test
@@ -36,7 +34,7 @@ class FlagMapTest {
 		flagMap.run(new ConditionalRunForMap<>(() -> count.increment(), new IsAllTrueInMap<>(selectedKeys)));
 		
 		// Check if the logic has been executed.
-		assertThat(count.value(), new IsEqual<>(1));
+		assertThat("The logic should've been executed if the validation was met.", count.value(), new IsEqual<>(1));
 	}
 	
 	@Test
@@ -59,7 +57,11 @@ class FlagMapTest {
 		flagMap.run(new ConditionalRunForMap<>(() -> count.increment(), new IsAllTrueInMap<>(selectedKeys)));
 		
 		// Check if the logic has not been executed.
-		assertThat(count.value(), new IsEqual<>(0));
+		assertThat(
+			"The logic should've not been executed if the validation is not met.", 
+			count.value(), 
+			new IsEqual<>(0)
+		);
 	}
 	
 	private final String fruit1 = "Apple";

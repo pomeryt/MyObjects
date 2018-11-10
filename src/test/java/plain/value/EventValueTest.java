@@ -12,6 +12,7 @@ class EventValueTest {
 	@Test
 	void defaultValueViaConstructor() {
 		MatcherAssert.assertThat(
+			"The value injected by constructor should be returned.",
 			new EventValue<Integer>(0).value(), 
 			CoreMatchers.equalTo(0)
 		);
@@ -20,6 +21,7 @@ class EventValueTest {
 	@Test
 	void valueViaTask() {
 		MatcherAssert.assertThat(
+			"The value injected by constructor should be returned via task.",
 			new EventValue<Integer>(0).value(memory -> memory.get(0)), 
 			CoreMatchers.equalTo(0)
 		);
@@ -34,6 +36,7 @@ class EventValueTest {
 			number.update(x);
 		}
 		MatcherAssert.assertThat(
+			"The event should be handled.",
 			record, 
 			CoreMatchers.hasItems(0, 1, 2)
 		);
@@ -47,6 +50,7 @@ class EventValueTest {
 			memory.add(0);
 		});
 		MatcherAssert.assertThat(
+			"The value should be updated via task.",
 			number.value(), 
 			CoreMatchers.equalTo(0)
 		);

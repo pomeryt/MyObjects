@@ -11,11 +11,9 @@ import java.util.Set;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import plain.contract.map.GiveableMap;
 import plain.contract.task.ReturnTask;
 
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class IsThereFalseInMapTest {
 		
 	@Test
@@ -30,7 +28,11 @@ class IsThereFalseInMapTest {
 		final IsThereFalseInMap<String> isThereFalseInMap = new IsThereFalseInMap<>();
 		
 		// Check if the map is valid.
-		assertThat(isThereFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if it has a false.",
+			isThereFalseInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -50,7 +52,11 @@ class IsThereFalseInMapTest {
 		final IsThereFalseInMap<String> isThereFalseInMap = new IsThereFalseInMap<>(selectedKeys);
 		
 		// Check if the map is valid.
-		assertThat(isThereFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(true));
+		assertThat(
+			"The map should be valid if there is a false in the selected values.",
+			isThereFalseInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -65,7 +71,11 @@ class IsThereFalseInMapTest {
 		final IsThereFalseInMap<String> isThereFalseInMap = new IsThereFalseInMap<>();
 		
 		// Check if the map is invalid.
-		assertThat(isThereFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(false));
+		assertThat(
+			"The map should be invalid if it does not have a false.",
+			isThereFalseInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(false)
+		);
 	}
 		@Test
 	void testInvalidCaseWithSelection() {
@@ -84,7 +94,11 @@ class IsThereFalseInMapTest {
 		final IsThereFalseInMap<String> isThereFalseInMap = new IsThereFalseInMap<>(selectedKeys);
 		
 		// Check if the map is invalid.
-		assertThat(isThereFalseInMap.valid(this.giveableMap(map)), new IsEqual<>(false));
+		assertThat(
+			"The map should be invalid if there is no false in the selected values.",
+			isThereFalseInMap.valid(this.giveableMap(map)), 
+			new IsEqual<>(false)
+		);
 	}
 	
 

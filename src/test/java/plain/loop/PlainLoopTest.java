@@ -9,33 +9,37 @@ import plain.number.count.PlainCount;
 class PlainLoopTest {
 
 	@Test
-	void testPositiveLoop() {
+	void shouldRepeatByPositiveInteger() {
 		final PlainCount count = new PlainCount();
 		new PlainLoop(3, () -> {
 			count.increment();
 		}).repeat();
 		
-		assertThat(count.value(), new IsEqual<>(3));
+		assertThat(
+			"The loop should increment the count by the given integer.", 
+			count.value(), 
+			new IsEqual<>(3)
+		);
 	}
 	
 	@Test
-	void testNegativeLoop() {
+	void shouldNotRepeatIfNegativeIntegerIsGiven() {
 		final PlainCount count = new PlainCount();
 		new PlainLoop(-3, () -> {
 			count.increment();
 		}).repeat();
 		
-		assertThat(count.value(), new IsEqual<>(0));
+		assertThat("Negative loop should not do anything.", count.value(), new IsEqual<>(0));
 	}
 	
 	@Test
-	void testZeroLoop() {
+	void shouldNotRepeatIfZeroIsGiven() {
 		final PlainCount count = new PlainCount();
 		new PlainLoop(0, () -> {
 			count.increment();
 		}).repeat();
 		
-		assertThat(count.value(), new IsEqual<>(0));
+		assertThat("Zero loop should not do anything.", count.value(), new IsEqual<>(0));
 	}
 
 }

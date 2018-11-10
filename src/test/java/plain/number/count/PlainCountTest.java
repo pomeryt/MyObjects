@@ -12,7 +12,11 @@ class PlainCountTest {
 		for (int x = 0; x < 3; x++) {
 			count.increment();
 		}
-		MatcherAssert.assertThat(count.value(), CoreMatchers.equalTo(3));
+		MatcherAssert.assertThat(
+			"The number should've been incremented from 0.",
+			count.value(), 
+			CoreMatchers.equalTo(3)
+		);
 	}
 	
 	@Test
@@ -21,6 +25,10 @@ class PlainCountTest {
 		for (int x = 0; x < 3; x++) {
 			count.increment();
 		}
-		MatcherAssert.assertThat(count.value(), CoreMatchers.equalTo(6));
+		MatcherAssert.assertThat(
+			"The number should've been incremented from the given value.",
+			count.value(), 
+			CoreMatchers.equalTo(6)
+		);
 	}
 }

@@ -17,7 +17,11 @@ class IsKeyNewToMapTest {
 		final IsKeyNewToMap<String, String> isKeyNewToMap = new IsKeyNewToMap<>();
 		
 		// Check if the key has not been used before.
-		assertThat(isKeyNewToMap.valid("key", "value", map), new IsEqual<>(true));
+		assertThat(
+			"The key should be valid if it has not been used before.",
+			isKeyNewToMap.valid("key", "value", map), 
+			new IsEqual<>(true)
+		);
 	}
 	
 	@Test
@@ -28,7 +32,11 @@ class IsKeyNewToMapTest {
 		final IsKeyNewToMap<String, String> isKeyNewToMap = new IsKeyNewToMap<>();
 		
 		// Check if the key is invalid.
-		assertThat(isKeyNewToMap.valid("key", "value", map), new IsEqual<>(false));
+		assertThat(
+			"The key should be invalid if it has been used before.",
+			isKeyNewToMap.valid("key", "value", map), 
+			new IsEqual<>(false)
+		);
 	}
 
 }

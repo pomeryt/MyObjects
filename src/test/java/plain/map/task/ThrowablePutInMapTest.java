@@ -8,9 +8,6 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
-@SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 class ThrowablePutInMapTest {
 	
 	@Test
@@ -19,7 +16,11 @@ class ThrowablePutInMapTest {
 		new ThrowablePutInMap<Integer, Integer>(
 			0, 0, this.errorMessage, (key, value, localMap) -> true
 		).handle(map);
-		MatcherAssert.assertThat(map.get(0), CoreMatchers.equalTo(0));
+		MatcherAssert.assertThat(
+			"The item should've inserted if the validation is met.", 
+			map.get(0), 
+			CoreMatchers.equalTo(0)
+		);
 	}
 
 	@Test
@@ -30,7 +31,8 @@ class ThrowablePutInMapTest {
 				new ThrowablePutInMap<Integer, Integer>(
 					0, 0, this.errorMessage, (key, value, localMap) -> false
 				).handle(new HashMap<>());
-			}
+			},
+			"It should throws exception when it tries to put an item because the validation is not met."
 		);
 	}
 	
