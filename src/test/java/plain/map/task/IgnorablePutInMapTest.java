@@ -1,7 +1,7 @@
 package plain.map.task;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -13,7 +13,7 @@ class IgnorablePutInMapTest {
 
 	@Test
 	void testSingleInvalidCase() {
-		final Map<String, String> map = new HashMap<>();
+		final Map<String, String> map = new ConcurrentHashMap<>();
 		map.put(this.key1, this.fruit1);
 		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, this.dummyValidation(false)
 		).handle(map);
@@ -25,7 +25,7 @@ class IgnorablePutInMapTest {
 	
 	@Test
 	void testSingleInvalidAmongMultipleValidCase() {
-		final Map<String, String> map = new HashMap<>();
+		final Map<String, String> map = new ConcurrentHashMap<>();
 		map.put(this.key1, this.fruit1);
 		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, 
 			this.dummyValidation(true), 
@@ -40,7 +40,7 @@ class IgnorablePutInMapTest {
 	
 	@Test
 	void testSingleValidCase() {
-		final Map<String, String> map = new HashMap<>();
+		final Map<String, String> map = new ConcurrentHashMap<>();
 		map.put(this.key1, this.fruit1);
 		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, this.dummyValidation(true)
 		).handle(map);
@@ -52,7 +52,7 @@ class IgnorablePutInMapTest {
 	
 	@Test
 	void testMultipleValidCase() {
-		final Map<String, String> map = new HashMap<>();
+		final Map<String, String> map = new ConcurrentHashMap<>();
 		map.put(this.key1, this.fruit1);
 		new IgnorablePutInMap<String, String>(this.key1, this.fruit2, 
 			this.dummyValidation(true), 

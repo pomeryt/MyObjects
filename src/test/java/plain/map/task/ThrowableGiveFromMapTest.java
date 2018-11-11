@@ -2,6 +2,7 @@ package plain.map.task;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -12,7 +13,7 @@ class ThrowableGiveFromMapTest {
 	
 	@Test
 	void validGive() {
-		final Map<Integer, Integer> map = new HashMap<>();
+		final Map<Integer, Integer> map = new ConcurrentHashMap<>();
 		map.put(0, 0);
 		MatcherAssert.assertThat(
 			"It should give the value if the validation is met.",

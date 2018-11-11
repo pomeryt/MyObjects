@@ -3,10 +3,10 @@ package plain.validation.map;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class IsThereTrueInMapTest {
 	@Test
 	void testValidCaseWithoutSelection() {
 		// A map to be validated.
-		final Map<String, Boolean> map = new HashMap<>();
+		final Map<String, Boolean> map = new ConcurrentHashMap<>();
 		map.put(this.fruit1, false);
 		map.put(this.fruit2, true);
 		map.put(this.fruit3, false);
@@ -38,7 +38,7 @@ class IsThereTrueInMapTest {
 	@Test
 	void testValidCaseWithSelection() {
 		// A map to be validated.
-		final Map<String, Boolean> map = new HashMap<>();
+		final Map<String, Boolean> map = new ConcurrentHashMap<>();
 		map.put(this.fruit1, false);
 		map.put(this.fruit2, false);
 		map.put(this.fruit3, true);
@@ -62,7 +62,7 @@ class IsThereTrueInMapTest {
 	@Test
 	void testInvalidCaseWithoutSelection() {
 		// A map to be validated.
-		final Map<String, Boolean> map = new HashMap<>();
+		final Map<String, Boolean> map = new ConcurrentHashMap<>();
 		map.put(this.fruit1, false);
 		map.put(this.fruit2, false);
 		map.put(this.fruit3, false);
@@ -81,7 +81,7 @@ class IsThereTrueInMapTest {
 	@Test
 	void testInvalidCaseWithSelection() {
 		// A map to be validated.
-		final Map<String, Boolean> map = new HashMap<>();
+		final Map<String, Boolean> map = new ConcurrentHashMap<>();
 		map.put(this.fruit1, false);
 		map.put(this.fruit2, true);
 		map.put(this.fruit3, false);

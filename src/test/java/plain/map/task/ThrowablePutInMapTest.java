@@ -2,6 +2,7 @@ package plain.map.task;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -12,7 +13,7 @@ class ThrowablePutInMapTest {
 	
 	@Test
 	void validPut() {
-		final Map<Integer, Integer> map = new HashMap<>();
+		final Map<Integer, Integer> map = new ConcurrentHashMap<>();
 		new ThrowablePutInMap<Integer, Integer>(
 			0, 0, this.errorMessage, (key, value, localMap) -> true
 		).handle(map);

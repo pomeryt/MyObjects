@@ -2,6 +2,7 @@ package plain.map.task;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -63,7 +64,7 @@ class DefaultableGiveFromMapTest {
 	}
 	
 	private Map<String, String> mapWithDefaultPair(final String key, final String value) {
-		final Map<String, String> map = new HashMap<>();
+		final Map<String, String> map = new ConcurrentHashMap<>();
 		map.put(key, value);
 		return map;
 	}
