@@ -43,7 +43,7 @@ class ThrowableGiveTest {
 		// Validation object that return false always.
 		final ListValidation<String> validation = new ListValidation<String>() {
 			@Override
-			public boolean valid(List<String> list) {
+			public boolean valid(final List<String> list) {
 				return false;
 			}
 		};
