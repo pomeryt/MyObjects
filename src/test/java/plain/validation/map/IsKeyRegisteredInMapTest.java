@@ -15,12 +15,12 @@ class IsKeyRegisteredInMapTest {
 		// Prepare for the test.
 		final Map<String, String> map = new ConcurrentHashMap<>();
 		map.put("test", "Apple");
-		final IsKeyRegisteredInMap<String, String> isKeyRegistered = new IsKeyRegisteredInMap<>();
+		final IsKeyRegisteredInMap<String, String> keyCheck = new IsKeyRegisteredInMap<>();
 		
 		// Check if the key has been registered in map.
 		assertThat(
 			"The key should be valid if it exists in the map.",
-			isKeyRegistered.valid("test", map), 
+			keyCheck.valid("test", map), 
 			new IsEqual<>(true)
 		);
 	}
@@ -29,12 +29,12 @@ class IsKeyRegisteredInMapTest {
 	void testInvalidCase() {
 		// Prepare for the test.
 		final Map<String, String> map = new ConcurrentHashMap<>();
-		final IsKeyRegisteredInMap<String, String> isKeyRegistered = new IsKeyRegisteredInMap<>();
+		final IsKeyRegisteredInMap<String, String> keyCheck = new IsKeyRegisteredInMap<>();
 		
 		// Check if the key has not been registered in map.
 		assertThat(
 			"The key should be invalid if it does not exist in the map.",
-			isKeyRegistered.valid("test", map), 
+			keyCheck.valid("test", map), 
 			new IsEqual<>(false)
 		);
 	}

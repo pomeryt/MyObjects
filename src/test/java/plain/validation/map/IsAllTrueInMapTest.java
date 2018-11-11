@@ -41,12 +41,12 @@ class IsAllTrueInMapTest {
 		};
 		
 		// The object to be tested.
-		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>();
+		final IsAllTrueInMap<String> allTrueValidation = new IsAllTrueInMap<>();
 		
 		// Check if the map is valid.
 		assertThat(
 			"The map should be valid if all values are true.",
-			isAllTrueInMap.valid(giveableMap), 
+			allTrueValidation.valid(giveableMap), 
 			new IsEqual<>(true)
 		);
 	}
@@ -81,12 +81,12 @@ class IsAllTrueInMapTest {
 		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
-		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>(selectedKeys);
+		final IsAllTrueInMap<String> allTrueValidation = new IsAllTrueInMap<>(selectedKeys);
 		
 		// Check if the map is valid.
 		assertThat(
 			"The map should be valid if all selected values are true.",
-			isAllTrueInMap.valid(giveableMap), 
+			allTrueValidation.valid(giveableMap), 
 			new IsEqual<>(true)
 		);
 	}
@@ -116,12 +116,12 @@ class IsAllTrueInMapTest {
 		};
 		
 		// The object to be tested.
-		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>();
+		final IsAllTrueInMap<String> allTrueValidation = new IsAllTrueInMap<>();
 		
 		// Check if the map is invalid.
 		assertThat(
 			"The map should be invalid if it has false.",
-			isAllTrueInMap.valid(giveableMap), 
+			allTrueValidation.valid(giveableMap), 
 			new IsEqual<>(false)
 		);
 	}
@@ -156,12 +156,12 @@ class IsAllTrueInMapTest {
 		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
-		final IsAllTrueInMap<String> isAllTrueInMap = new IsAllTrueInMap<>(selectedKeys);
+		final IsAllTrueInMap<String> allTrueValidation = new IsAllTrueInMap<>(selectedKeys);
 		
 		// Check if the map is invalid.
 		assertThat(
 			"The the should be invalid if there is a false in the selected values.",
-			isAllTrueInMap.valid(giveableMap), 
+			allTrueValidation.valid(giveableMap), 
 			new IsEqual<>(false)
 		);
 	}

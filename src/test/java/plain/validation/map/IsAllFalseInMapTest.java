@@ -43,12 +43,12 @@ class IsAllFalseInMapTest {
 		map.put(this.fruit3, false);
 		
 		// The object to be tested.
-		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>();
+		final IsAllFalseInMap<String> allFalseCheck = new IsAllFalseInMap<>();
 		
 		// Check if the map is valid.
 		assertThat(
 			"The map should be valid if all values are false.",
-			isAllFalseInMap.valid(this.giveableMap(map)), 
+			allFalseCheck.valid(this.giveableMap(map)), 
 			new IsEqual<>(true)
 		);
 	}
@@ -67,12 +67,12 @@ class IsAllFalseInMapTest {
 		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
-		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>(selectedKeys);
+		final IsAllFalseInMap<String> allFalseCheck = new IsAllFalseInMap<>(selectedKeys);
 		
 		// Check if the map is valid.
 		assertThat(
 			"The map should be valid if all selected values are false.",
-			isAllFalseInMap.valid(this.giveableMap(map)), 
+			allFalseCheck.valid(this.giveableMap(map)), 
 			new IsEqual<>(true)
 		);
 	}
@@ -86,12 +86,12 @@ class IsAllFalseInMapTest {
 		map.put(this.fruit3, true);
 		
 		// The object to be tested.
-		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>();
+		final IsAllFalseInMap<String> allFalseCheck = new IsAllFalseInMap<>();
 		
 		// Check if the map is invalid.
 		assertThat(
 			"The map should be invalid if it has true.",
-			isAllFalseInMap.valid(this.giveableMap(map)), 
+			allFalseCheck.valid(this.giveableMap(map)), 
 			new IsEqual<>(false)
 		);
 	}
@@ -110,12 +110,12 @@ class IsAllFalseInMapTest {
 		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
-		final IsAllFalseInMap<String> isAllFalseInMap = new IsAllFalseInMap<>(selectedKeys);
+		final IsAllFalseInMap<String> allFalseCheck = new IsAllFalseInMap<>(selectedKeys);
 		
 		// Check if the map is invalid.
 		assertThat(
 			"The map should be invalid if there is a true in selected values.",
-			isAllFalseInMap.valid(this.giveableMap(map)),
+			allFalseCheck.valid(this.giveableMap(map)),
 			new IsEqual<>(false)
 		);
 	}

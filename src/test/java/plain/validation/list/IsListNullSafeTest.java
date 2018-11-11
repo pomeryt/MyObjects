@@ -13,7 +13,7 @@ class IsListNullSafeTest {
 	@Test
 	void testValidCase() {
 		// IsListNullSafe object.
-		final IsListNullSafe<String> isListNullSafe = new IsListNullSafe<>();
+		final IsListNullSafe<String> nullSafeCheck = new IsListNullSafe<>();
 		
 		// List that does not have null.
 		final List<String> list = new ArrayList<>();
@@ -22,7 +22,7 @@ class IsListNullSafeTest {
 		// Check if the list is valid.
 		assertThat(
 			"The list should be valid if it doesn't have null.",
-			isListNullSafe.valid(list), 
+			nullSafeCheck.valid(list), 
 			new IsEqual<>(true)
 		);
 	}
@@ -30,7 +30,7 @@ class IsListNullSafeTest {
 	@Test
 	void testInvalidCase() {
 		// IsListNullSafe object.
-		final IsListNullSafe<String> isListNullSafe = new IsListNullSafe<>();
+		final IsListNullSafe<String> nullSafeCheck = new IsListNullSafe<>();
 		
 		// List that contains null.
 		final List<String> list = new ArrayList<>();
@@ -39,7 +39,7 @@ class IsListNullSafeTest {
 		// Check if the list is invalid.
 		assertThat(
 			"The should be invalid if it has null.",
-			isListNullSafe.valid(list), 
+			nullSafeCheck.valid(list), 
 			new IsEqual<>(false)
 		);
 	}

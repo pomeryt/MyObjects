@@ -14,12 +14,12 @@ class IsKeyNewToMapTest {
 	void testValidCase() {
 		// Prepare for the test.
 		final Map<String, String> map = new ConcurrentHashMap<>();
-		final IsKeyNewToMap<String, String> isKeyNewToMap = new IsKeyNewToMap<>();
+		final IsKeyNewToMap<String, String> newKeyValidation = new IsKeyNewToMap<>();
 		
 		// Check if the key has not been used before.
 		assertThat(
 			"The key should be valid if it has not been used before.",
-			isKeyNewToMap.valid("key", "value", map), 
+			newKeyValidation.valid("key", "value", map), 
 			new IsEqual<>(true)
 		);
 	}
@@ -29,12 +29,12 @@ class IsKeyNewToMapTest {
 		// Prepare for the test.
 		final Map<String, String> map = new ConcurrentHashMap<>();
 		map.put("key", "value");
-		final IsKeyNewToMap<String, String> isKeyNewToMap = new IsKeyNewToMap<>();
+		final IsKeyNewToMap<String, String> newKeyValidation = new IsKeyNewToMap<>();
 		
 		// Check if the key is invalid.
 		assertThat(
 			"The key should be invalid if it has been used before.",
-			isKeyNewToMap.valid("key", "value", map), 
+			newKeyValidation.valid("key", "value", map), 
 			new IsEqual<>(false)
 		);
 	}

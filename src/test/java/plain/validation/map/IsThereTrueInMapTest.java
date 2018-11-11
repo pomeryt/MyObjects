@@ -25,12 +25,12 @@ class IsThereTrueInMapTest {
 		map.put(this.fruit3, false);
 		
 		// The object to be tested.
-		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>();
+		final IsThereTrueInMap<String> trueExistsCheck = new IsThereTrueInMap<>();
 		
 		// Check if the map is valid.
 		assertThat(
 			"The map should be valid if there is a true.",
-			isThereTrueInMap.valid(this.giveableMap(map)), 
+			trueExistsCheck.valid(this.giveableMap(map)), 
 			new IsEqual<>(true)
 		);
 	}
@@ -49,12 +49,12 @@ class IsThereTrueInMapTest {
 		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
-		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>(selectedKeys);
+		final IsThereTrueInMap<String> trueExistsCheck = new IsThereTrueInMap<>(selectedKeys);
 		
 		// Check if the map is valid.
 		assertThat(
 			"The map should be valid if there is a true in the selected values.",
-			isThereTrueInMap.valid(this.giveableMap(map)), 
+			trueExistsCheck.valid(this.giveableMap(map)), 
 			new IsEqual<>(true)
 		);
 	}
@@ -68,12 +68,12 @@ class IsThereTrueInMapTest {
 		map.put(this.fruit3, false);
 		
 		// The object to be tested.
-		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>();
+		final IsThereTrueInMap<String> trueExistsCheck = new IsThereTrueInMap<>();
 		
 		// Check if the map is invalid.
 		assertThat(
 			"The map should be invalid if it does not have true.",
-			isThereTrueInMap.valid(this.giveableMap(map)), 
+			trueExistsCheck.valid(this.giveableMap(map)), 
 			new IsEqual<>(false)
 		);
 	}
@@ -92,12 +92,12 @@ class IsThereTrueInMapTest {
 		selectedKeys.add(this.fruit3);
 		
 		// The object to be tested.
-		final IsThereTrueInMap<String> isThereTrueInMap = new IsThereTrueInMap<>(selectedKeys);
+		final IsThereTrueInMap<String> trueExistsCheck = new IsThereTrueInMap<>(selectedKeys);
 		
 		// Check if the map is invalid.
 		assertThat(
 			"The map should be invalid if there is no true in the selected values.",
-			isThereTrueInMap.valid(this.giveableMap(map)), 
+			trueExistsCheck.valid(this.giveableMap(map)), 
 			new IsEqual<>(false)
 		);
 	}
