@@ -1,4 +1,4 @@
-package plain2.value;
+package plain.value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,14 @@ import java.util.List;
 public final class BaseEventValue<T> implements EventValue<T> {
 
 	/**
-	 * @param value Initial value.
+	 * Primary constructor.
+	 * @param value Initial value
 	 * @since 1.0.0
 	 */
 	public BaseEventValue(final T value) {
 		this.content = value;
 	}
-	
+
 	@Override
 	public T value() {
 		return this.content;
@@ -37,8 +38,8 @@ public final class BaseEventValue<T> implements EventValue<T> {
 	public void addEvent(final UpdateEvent<T> event) {
 		this.events.add(event);
 	}
-	
+
 	private T content;
-	
+
 	private final List<UpdateEvent<T>> events = new ArrayList<>();
 }

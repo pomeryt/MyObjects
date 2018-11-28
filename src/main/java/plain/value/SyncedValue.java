@@ -1,65 +1,37 @@
 package plain.value;
 
-import java.util.List;
-
-import plain.contract.event.ParamEvent;
-import plain.contract.task.ReturnTask;
-import plain.contract.update.task.TaskOfUpdateable;
-
 /**
- * Thread-safe version of {@link EventValue}. 
+ * It decorates an {@link EventValue} object and make it thread-safe.
  * @author Rin
- * @version 2.0.1
+ * @version 1.0.0
  * @param <T> The type of value.
  */
-public final class SyncedValue<T> implements LiveValue<T> {
-	
-	public SyncedValue() {
-		this(new EventValue<>());
-	}
-	
-	public SyncedValue(final T initialValue) {
-		this(new EventValue<>(initialValue));
-	}
-	
-	public SyncedValue(final LiveValue<T> liveValue) {
-		this.liveValue = liveValue;
-	}
-	
-	@Override
-	public void update(final TaskOfUpdateable<T> task) {
-		synchronized (this) {
-			this.liveValue.update(task);
-		}
-	}
+public final class SyncedValue<T> implements EventValue<T> {
 
+	public SyncedValue(final EventValue<T> origin) {
+		this.origin = origin;
+	}
+	
 	@Override
-	public T value(final ReturnTask<T, List<T>> task) {
+	public T value() {
 		synchronized (this) {
-			return this.liveValue.value(task);
+			return this.origin.value();
 		}
 	}
 
 	@Override
 	public void update(final T value) {
 		synchronized (this) {
-			this.liveValue.update(value);
+			this.origin.update(value);
 		}
 	}
 
 	@Override
-	public void addEvent(final ParamEvent<T> event) {
+	public void addEvent(final UpdateEvent<T> event) {
 		synchronized (this) {
-			this.liveValue.addEvent(event);
+			this.origin.addEvent(event);
 		}
 	}
 
-	@Override
-	public T value() {
-		synchronized (this) {
-			return this.liveValue.value();
-		}
-	}
-	
-	private final LiveValue<T> liveValue;
+	private final EventValue<T> origin;
 }
