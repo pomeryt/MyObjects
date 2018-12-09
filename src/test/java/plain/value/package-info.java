@@ -1,0 +1,4 @@
+/**
+ * Test.
+ */
+package plain.value;
